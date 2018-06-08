@@ -27,6 +27,22 @@ android {
         }
     }
 
+
+    //动态配置清单文件
+    sourceSets{
+        main{
+            if(isUserModel.toBoolean()){
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                //release模式下，排除debug目录下的所有java文件
+                java{
+                    exclude 'debug/**'
+                }
+            }else{
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            }
+        }
+    }
+
 }
 
 dependencies {
