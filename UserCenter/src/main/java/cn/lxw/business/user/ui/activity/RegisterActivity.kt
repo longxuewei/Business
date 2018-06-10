@@ -1,9 +1,10 @@
 package cn.lxw.business.user.ui.activity
 
-import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import cn.lxw.business.R
+import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
+import cn.lxw.business.user.presenter.RegisterPresenter
+import cn.lxw.business.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
@@ -16,13 +17,18 @@ import org.jetbrains.anko.toast
  * 备注：
  * 功能描述：
  */
-class RegisterActivity : Activity(){
+class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
+    override fun onRegisterResult(result: Boolean) {
+        toast("注册成功")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        btCommit.setOnClickListener{
-        toast("haha ")
-
+        presenter = RegisterPresenter()
+        presenter.mView = this
+        btCommit.setOnClickListener {
+            presenter.register("", "")
         }
     }
 }
