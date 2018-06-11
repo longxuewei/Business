@@ -6,11 +6,11 @@ package cn.lxw.business.baselibrary.common
  * Email: China2021@126.com
  * 时间轴：2018年06月11日 下午9:52
  * *******************************
- * 备注：常亮
+ * 备注：基础服务器地址
  * 功能描述：
  */
 class BaseConstant {
     companion object {
-        const val SERVICE_ADDRESS = ""
+        const val SERVICE_ADDRESS = "http://www.mocky.io/v2"
     }
 }

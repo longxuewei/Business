@@ -1,7 +1,10 @@
 package cn.lxw.business.user.service.impl
 
+import cn.lxw.business.baselibrary.data.protocol.BaseResponse
+import cn.lxw.business.user.data.repository.UserRepository
 import cn.lxw.business.user.service.UserService
 import io.reactivex.Observable
+import rx.functions.Func1
 
 /**
  * *******************************
@@ -14,7 +17,7 @@ import io.reactivex.Observable
  */
 class UserServiceImpl : UserService {
     override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
-
-        return Observable.just(true)
+        val repository = UserRepository()
+        repository.register(mobile, pwd, verifyCode).flatMap(object : Func1<BaseResponse<String>, Observable<Boolean>> {})
     }
 }
