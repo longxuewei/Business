@@ -22,7 +22,7 @@ class RegisterPresenter : BasePresenter<RegisterView>() {
         service.register("", "", "").execute(object : BaseObserver<Boolean>() {
             override fun onNext(t: Boolean) {
                 super.onNext(t)
-                mView.onRegisterResult(true)
+                mView.onRegisterResult(t)
             }
         })
     }

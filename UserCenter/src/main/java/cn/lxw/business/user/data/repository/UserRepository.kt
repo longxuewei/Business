@@ -4,7 +4,7 @@ import cn.lxw.business.baselibrary.data.net.RetrofitFactory
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.user.data.api.UserApi
 import cn.lxw.business.user.data.protocol.RegisterReq
-import rx.Observable
+import io.reactivex.Observable
 
 /**
  * *******************************
@@ -25,6 +25,6 @@ class UserRepository {
      *
      */
     fun register(mobile: String, pwd: String, verifyCode: String): Observable<BaseResponse<String>> {
-        return RetrofitFactory.instance.create(UserApi::class.java).register(RegisterReq(mobile, pwd, verifyCode))
+        return RetrofitFactory.instance.create(UserApi::class.java).register("5b229c062e00006000e3177d")
     }
 }

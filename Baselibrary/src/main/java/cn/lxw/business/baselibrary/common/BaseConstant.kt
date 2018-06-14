@@ -11,6 +11,6 @@ package cn.lxw.business.baselibrary.common
  */
 class BaseConstant {
     companion object {
-        const val SERVICE_ADDRESS = "http://www.mocky.io/v2"
+        const val SERVICE_ADDRESS = "http://www.mocky.io/"
     }
 }

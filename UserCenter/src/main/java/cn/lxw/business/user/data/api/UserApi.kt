@@ -1,10 +1,9 @@
 package cn.lxw.business.user.data.api
 
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
-import cn.lxw.business.user.data.protocol.RegisterReq
-import retrofit2.http.Body
-import retrofit2.http.POST
-import rx.Observable
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * *******************************
@@ -12,10 +11,11 @@ import rx.Observable
  * Email: China2021@126.com
  * 时间轴：2018年06月11日 下午11:41
  * *******************************
- * 备注：
+ * 备注：具体Retrofit所需要的接口层
  * 功能描述：
  */
 interface UserApi {
-    @POST("/5b1e99063100008a233ff96d")
-    fun register(@Body req: RegisterReq): Observable<BaseResponse<String>>
+
+    @GET("/v2/{code}")
+    fun register(@Path("code") code: String): Observable<BaseResponse<String>>
 }

@@ -5,7 +5,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -15,7 +15,11 @@ import java.util.concurrent.TimeUnit
  * Email: China2021@126.com
  * 时间轴：2018年06月11日 下午9:48
  * *******************************
- * 备注：封装retrofit 和 okhttp 网络访问框架。
+ * 备注：Retrofit的封装：
+ * 1. 采用单例模式封装了Retrofit。
+ * 2. 在构造方法中初始化了Retrofit和OkhttpClient。并设置了相关的参数。
+ * 3. 使用了日志拦截器，和添加了请求头。
+ * 4. 对外提供了Retrofit的接口创建方法[create]
  * 功能描述：
  */
 class RetrofitFactory private constructor() {
@@ -34,7 +38,7 @@ class RetrofitFactory private constructor() {
         retrofit = Retrofit.Builder()
                 .baseUrl(BaseConstant.SERVICE_ADDRESS)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(initClient())
                 .build()
     }
@@ -48,6 +52,7 @@ class RetrofitFactory private constructor() {
                 .readTimeout(10, TimeUnit.SECONDS)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(initInterceptor())
+                .addInterceptor(initBaseInterceptor())
                 .build()
     }
 
