@@ -3,6 +3,7 @@ package cn.lxw.business.user.ui.activity
 import android.os.Bundle
 import cn.lxw.business.R
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
+import cn.lxw.business.user.injection.component.DaggerUserComponent
 import cn.lxw.business.user.presenter.RegisterPresenter
 import cn.lxw.business.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
@@ -25,10 +26,14 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        presenter = RegisterPresenter()
-        presenter.mView = this
+        initInjection()
         btCommit.setOnClickListener {
             presenter.register("", "")
         }
+    }
+
+    private fun initInjection() {
+        DaggerUserComponent.builder().activityComponent(activityComponent).build().inject(this)
+        presenter.mView = this
     }
 }

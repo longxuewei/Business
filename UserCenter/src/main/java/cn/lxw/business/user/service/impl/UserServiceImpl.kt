@@ -5,7 +5,7 @@ import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.user.data.repository.UserRepository
 import cn.lxw.business.user.service.UserService
 import io.reactivex.Observable
-import io.reactivex.functions.Function
+import javax.inject.Inject
 
 /**
  * *******************************
@@ -16,16 +16,24 @@ import io.reactivex.functions.Function
  * 备注：代码编译不报错了， 准备开始理一理Rx相关的东西。几个关键字：Subscript,Observable,Observer
  * 功能描述：
  */
-class UserServiceImpl : UserService {
-    override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
-        val repository = UserRepository()
+class UserServiceImpl @Inject constructor() : UserService {
 
-        return repository.register(mobile, pwd, verifyCode).flatMap(object : Function<BaseResponse<String>, Observable<Boolean>> {
-            override fun apply(t: BaseResponse<String>): Observable<Boolean> {
-                Log.d("TAG：结果", "${t.data}")
-                return Observable.just(t.data.contains("Success"))
+    @Inject
+    lateinit var repository: UserRepository
+
+    override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
+        return repository.register(mobile, pwd, verifyCode).flatMap(object : Function1<BaseResponse<String>, Observable<Boolean>> {
+            override fun invoke(p1: BaseResponse<String>): Observable<Boolean> {
+                Log.d("TAG:", "哈哈成功啦")
+                return Observable.just(true)
             }
         })
+//        repository.register(mobile, pwd, verifyCode).subscribe(object : Consumer<BaseResponse<String>> {
+//            override fun accept(t: BaseResponse<String>) {
+//
+//            }
+//
+//        })
 
     }
 }

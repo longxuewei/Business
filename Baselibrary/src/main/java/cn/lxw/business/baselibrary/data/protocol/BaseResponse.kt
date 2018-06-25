@@ -12,6 +12,11 @@ package cn.lxw.business.baselibrary.data.protocol
  * [status]：状态码
  * [message]：说明信息
  * [data]：真正需要的数据
- * 功能描述：
+ *
+ *
+ * 功能描述： 格式如下：
+ *
+ *
+ * [{"data":{"ahahah":"hahahah","heihei":"heihei"},"status":1,"message":"这是提示信息"}]
  */
 data class BaseResponse<T>(val status: Int, val message: String, val data: T)

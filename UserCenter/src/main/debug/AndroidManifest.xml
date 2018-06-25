@@ -8,6 +8,7 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name=".baselibrary.common.BaseApplication"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
 

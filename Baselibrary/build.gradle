@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 26
 
@@ -42,4 +43,8 @@ dependencies {
 
     api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     api "com.squareup.okhttp3:okhttp:$okhttp_version"
+
+
+    compile "com.google.dagger:dagger:$dagger2_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2_version"
 }
