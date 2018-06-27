@@ -1,6 +1,6 @@
 package cn.lxw.business.baselibrary.ui.activity
 
-import android.app.Activity
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
 /**
  * *******************************
@@ -11,5 +11,5 @@ import android.app.Activity
  * 备注：
  * 功能描述：
  */
-open class BaseActivity : Activity(){
+open class BaseActivity : RxAppCompatActivity() {
 }

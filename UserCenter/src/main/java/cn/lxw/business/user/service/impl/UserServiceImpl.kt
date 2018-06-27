@@ -28,12 +28,5 @@ class UserServiceImpl @Inject constructor() : UserService {
                 return Observable.just(true)
             }
         })
-//        repository.register(mobile, pwd, verifyCode).subscribe(object : Consumer<BaseResponse<String>> {
-//            override fun accept(t: BaseResponse<String>) {
-//
-//            }
-//
-//        })
-
     }
 }

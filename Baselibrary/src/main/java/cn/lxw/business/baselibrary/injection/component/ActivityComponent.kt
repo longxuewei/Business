@@ -1,10 +1,11 @@
 package cn.lxw.business.baselibrary.injection.component
 
-import android.content.Context
+import android.app.Activity
 import cn.lxw.business.baselibrary.injection.ActivityScope
 import cn.lxw.business.baselibrary.injection.module.ActivityModule
+import cn.lxw.business.baselibrary.injection.module.LifeCycleProviderModule
+import com.trello.rxlifecycle2.LifecycleProvider
 import dagger.Component
-import javax.inject.Singleton
 
 /**
  * *******************************
@@ -16,7 +17,8 @@ import javax.inject.Singleton
  * 功能描述：
  */
 @ActivityScope
-@Component(dependencies = [(AppComponent::class)],modules = [(ActivityModule::class)])
+@Component(dependencies = [(AppComponent::class)], modules = [(ActivityModule::class), (LifeCycleProviderModule::class)])
 interface ActivityComponent {
-    fun context(): Context
+    fun activity(): Activity
+    fun lifeCycleProviderModule(): LifecycleProvider<*>
 }

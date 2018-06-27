@@ -7,6 +7,7 @@ import cn.lxw.business.baselibrary.injection.component.DaggerActivityComponent
 import cn.lxw.business.baselibrary.injection.module.ActivityModule
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.presenter.view.BaseView
+import com.trello.rxlifecycle2.LifecycleProvider
 import javax.inject.Inject
 
 /**
@@ -20,9 +21,12 @@ import javax.inject.Inject
  */
 open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
 
+    /** 逻辑层 */
     @Inject
     lateinit var presenter: T
+
     lateinit var activityComponent: ActivityComponent
+
 
 
     override fun showLoading() {

@@ -1,6 +1,8 @@
 package cn.lxw.business.baselibrary.presenter
 
 import cn.lxw.business.baselibrary.presenter.view.BaseView
+import com.trello.rxlifecycle2.LifecycleProvider
+import javax.inject.Inject
 
 /**
  * *******************************
@@ -11,6 +13,12 @@ import cn.lxw.business.baselibrary.presenter.view.BaseView
  * 备注：
  * 功能描述：
  */
-open class BasePresenter<T:BaseView> {
-    lateinit var mView:T
+open class BasePresenter<T : BaseView> {
+
+    /** View 层的引用 */
+    lateinit var mView: T
+
+    /** 处理Rx引起的内存泄露问题 */
+    @Inject
+    lateinit var lifecycleProvider: LifecycleProvider<*>
 }

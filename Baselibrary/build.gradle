@@ -46,7 +46,7 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:$okhttp_version"
 
     //dagger2
-    implementation "com.google.dagger:dagger:$dagger2_version"
+    compile "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
 
     //RxLifeCycle

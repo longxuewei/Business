@@ -1,9 +1,7 @@
 package cn.lxw.business.baselibrary.injection
 
-import java.lang.annotation.Documented
-import java.lang.annotation.Retention
 import javax.inject.Scope
-import java.lang.annotation.RetentionPolicy.RUNTIME
+
 /**
  * *******************************
  * 猿代码: Lxw
@@ -14,6 +12,6 @@ import java.lang.annotation.RetentionPolicy.RUNTIME
  * 功能描述：
  */
 @Scope
-@Documented
-@Retention(RUNTIME)
+@kotlin.annotation.MustBeDocumented
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class ActivityScope

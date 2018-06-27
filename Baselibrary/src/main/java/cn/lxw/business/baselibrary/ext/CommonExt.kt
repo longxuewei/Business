@@ -1,6 +1,7 @@
 package cn.lxw.business.baselibrary.ext
 
 import cn.lxw.business.baselibrary.rx.BaseObserver
+import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,6 +16,9 @@ import io.reactivex.schedulers.Schedulers
  * 功能描述：
  */
 
-fun <T> Observable<T>.execute(subscribe: BaseObserver<T>) {
-    this.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(subscribe)
+fun <T> Observable<T>.execute(subscribe: BaseObserver<T>, lifecycleProvider: LifecycleProvider<*>) {
+    this.observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .compose(lifecycleProvider.bindToLifecycle())
+            .subscribe(subscribe)
 }
