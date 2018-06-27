@@ -38,13 +38,19 @@ dependencies {
     //Retrofit框架 和 okhttp框架
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
-//    api "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
+    //api "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
     api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
+    //okHttp
     api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     api "com.squareup.okhttp3:okhttp:$okhttp_version"
 
-
-    compile "com.google.dagger:dagger:$dagger2_version"
+    //dagger2
+    implementation "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
+
+    //RxLifeCycle
+    api "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rx_lifecycle_version"
+    api "com.trello.rxlifecycle2:rxlifecycle-components:$rx_lifecycle_version"
+
 }
