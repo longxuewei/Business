@@ -1,7 +1,6 @@
 package cn.lxw.business.user.service.impl
 
-import android.util.Log
-import cn.lxw.business.baselibrary.data.protocol.BaseResponse
+import cn.lxw.business.baselibrary.ext.convertBoolean
 import cn.lxw.business.user.data.repository.UserRepository
 import cn.lxw.business.user.service.UserService
 import io.reactivex.Observable
@@ -22,11 +21,6 @@ class UserServiceImpl @Inject constructor() : UserService {
     lateinit var repository: UserRepository
 
     override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
-        return repository.register(mobile, pwd, verifyCode).flatMap(object : Function1<BaseResponse<String>, Observable<Boolean>> {
-            override fun invoke(p1: BaseResponse<String>): Observable<Boolean> {
-                Log.d("TAG:", "哈哈成功啦")
-                return Observable.just(true)
-            }
-        })
+        return repository.register(mobile, pwd, verifyCode).convertBoolean()
     }
 }

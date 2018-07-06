@@ -2,6 +2,7 @@ package cn.lxw.business.user.ui.activity
 
 import android.os.Bundle
 import cn.lxw.business.R
+import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
 import cn.lxw.business.user.injection.component.DaggerUserComponent
 import cn.lxw.business.user.presenter.RegisterPresenter
@@ -27,9 +28,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         initInjection()
-        btCommit.setOnClickListener {
-            presenter.register("", "")
-        }
+        btCommit.onClick { presenter.register("", "") }
     }
 
     private fun initInjection() {

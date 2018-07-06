@@ -5,7 +5,6 @@ import cn.lxw.business.baselibrary.common.BaseApplication
 import cn.lxw.business.baselibrary.injection.component.ActivityComponent
 import cn.lxw.business.baselibrary.injection.component.DaggerActivityComponent
 import cn.lxw.business.baselibrary.injection.module.ActivityModule
-import cn.lxw.business.baselibrary.injection.module.LifeCycleProviderModule
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.presenter.view.BaseView
 import javax.inject.Inject
@@ -19,7 +18,7 @@ import javax.inject.Inject
  * 备注：Activity的基类，基于MVP设计模式。持有业务逻辑层（使用依赖注入）
  * 功能描述：
  */
-open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+open class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
 
     /** 逻辑层 */
     @Inject
@@ -43,8 +42,6 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     }
 
     private fun initActivityInjection() {
-        activityComponent = DaggerActivityComponent.builder().appComponent((application as BaseApplication).appComponent).activityModule(ActivityModule(this))
-                .lifeCycleProviderModule(LifeCycleProviderModule(this))
-                .build()
+        activityComponent = DaggerActivityComponent.builder().appComponent((activity.application as BaseApplication).appComponent).activityModule(ActivityModule(activity)).build()
     }
 }

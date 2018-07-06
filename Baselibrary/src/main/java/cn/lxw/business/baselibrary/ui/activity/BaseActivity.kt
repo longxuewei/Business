@@ -1,5 +1,7 @@
 package cn.lxw.business.baselibrary.ui.activity
 
+import android.os.Bundle
+import cn.lxw.business.baselibrary.common.AppManager
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
 /**
@@ -12,4 +14,14 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
  * 功能描述：
  */
 open class BaseActivity : RxAppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AppManager.instance.addActivity(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        AppManager.instance.finishActivity(this)
+    }
 }

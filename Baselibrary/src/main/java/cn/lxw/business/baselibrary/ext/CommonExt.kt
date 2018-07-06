@@ -1,5 +1,7 @@
 package cn.lxw.business.baselibrary.ext
 
+import android.view.View
+import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.baselibrary.rx.BaseObserver
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
@@ -21,4 +23,28 @@ fun <T> Observable<T>.execute(subscribe: BaseObserver<T>, lifecycleProvider: Lif
             .subscribeOn(Schedulers.io())
             .compose(lifecycleProvider.bindToLifecycle())
             .subscribe(subscribe)
+}
+
+
+fun <T> Observable<BaseResponse<T>>.convert(): Observable<T> {
+    return this.flatMap(BaseFunc())
+}
+
+fun <T> Observable<BaseResponse<T>>.convertBoolean(): Observable<Boolean> {
+    return this.flatMap(BaseFuncBoolean())
+}
+
+/**
+ * 扩展View的点击事件。
+ */
+fun View.onClick(listener: View.OnClickListener) {
+    this.setOnClickListener(listener)
+}
+
+
+/**
+ * 扩展View的点击事件，使用高阶函数的方式。传入方法调用
+ */
+fun View.onClick(method: () -> Unit) {
+    this.setOnClickListener { method() }
 }
