@@ -1,5 +1,6 @@
 package cn.lxw.business.baselibrary.rx
 
+import cn.lxw.business.baselibrary.presenter.view.BaseView
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -13,13 +14,17 @@ import io.reactivex.disposables.Disposable
  *  大多数类，都是想实现 [onNext] 方法。而不需要实现其他的方法。其实可以使用[Customer]这个类实现OnNext
  * 功能描述：
  */
-open class BaseObserver<T> : Observer<T> {
+open class BaseObserver<T>(private val baseView: BaseView) : Observer<T> {
 
-    override fun onComplete() {}
+    override fun onComplete() {
+        baseView.hideLoading()
+    }
 
     override fun onSubscribe(d: Disposable) {}
 
     override fun onNext(t: T) {}
 
-    override fun onError(e: Throwable) {}
+    override fun onError(e: Throwable) {
+        baseView.hideLoading()
+    }
 }

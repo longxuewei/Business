@@ -42,7 +42,7 @@ class HeadBar @JvmOverloads constructor(
             mTitleTv.text = it
         }
         rightText?.let {
-            mTitleTv.text = it
+            mRightTv.text = it
         }
     }
 }

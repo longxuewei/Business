@@ -8,6 +8,7 @@ import cn.lxw.business.baselibrary.injection.module.ActivityModule
 import cn.lxw.business.baselibrary.injection.module.LifeCycleProviderModule
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.presenter.view.BaseView
+import cn.lxw.business.baselibrary.widget.ProgressLoading
 import javax.inject.Inject
 
 /**
@@ -28,10 +29,16 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     lateinit var activityComponent: ActivityComponent
 
 
+    /** 基础加载框 */
+    lateinit var progressDialog: ProgressLoading
+
+
     override fun showLoading() {
+        progressDialog.show()
     }
 
     override fun hideLoading() {
+        progressDialog.hide()
     }
 
     override fun onError() {
@@ -40,6 +47,7 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initActivityInjection()
+        progressDialog = ProgressLoading.create(this)
     }
 
     private fun initActivityInjection() {
