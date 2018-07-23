@@ -21,6 +21,7 @@ class ActivityModule(private val activity: Activity) {
     /**
      * 提供全局的Context(Application)
      */
+    @ActivityScope
     @Provides
     fun providesActivity(): Activity {
         return this.activity

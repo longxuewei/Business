@@ -29,7 +29,6 @@ dependencies {
     api "org.jetbrains.anko:anko:$anko_version"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //Rx系列
@@ -39,6 +38,7 @@ dependencies {
     //Retrofit框架 和 okhttp框架
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
     //api "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
     api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
@@ -54,4 +54,18 @@ dependencies {
     api "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rx_lifecycle_version"
     api "com.trello.rxlifecycle2:rxlifecycle-components:$rx_lifecycle_version"
 
+    //Glide
+    api "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    //由于导入支持库之后，版本不一致导致编译不通过。现在统一所有支持库的版本号一致为：26.0.2
+    api "com.android.support:animated-vector-drawable:26.1.0"
+    api "com.android.support:appcompat-v7:26.1.0"
+    api "com.android.support:support-core-utils:26.1.0"
+    api "com.android.support:support-annotations:26.1.0"
+    api "com.android.support:support-compat:26.1.0"
+    api "com.android.support:support-core-ui:26.1.0"
+    api "com.android.support:support-fragment:26.1.0"
+    api "com.android.support:support-v4:26.1.0"
+    api "com.android.support:recyclerview-v7:26.1.0"
 }

@@ -1,9 +1,10 @@
 package cn.lxw.business.user.data.api
 
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
+import cn.lxw.business.user.data.protocol.RegisterReq
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 /**
  * *******************************
@@ -16,6 +17,6 @@ import retrofit2.http.Path
  */
 interface UserApi {
 
-    @GET("/v2/{code}")
-    fun register(@Path("code") code: String): Observable<BaseResponse<String>>
+    @POST("userCenter/register")
+    fun register(@Body req: RegisterReq): Observable<BaseResponse<String>>
 }

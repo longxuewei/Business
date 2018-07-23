@@ -7,6 +7,7 @@ import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
 import cn.lxw.business.user.injection.component.DaggerUserComponent
 import cn.lxw.business.user.presenter.RegisterPresenter
 import cn.lxw.business.user.presenter.view.RegisterView
+import com.kotlin.base.widgets.VerifyButton
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
@@ -28,7 +29,12 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         initInjection()
-        btCommit.onClick { presenter.register("", "") }
+        btCommit.onClick { presenter.register(etAccount.text.toString(), etVerifyCode.text.toString()) }
+
+        btGetVerifyCode.onClick {
+            btGetVerifyCode.requestSendVerifyNumber()
+        }
+
     }
 
     private fun initInjection() {

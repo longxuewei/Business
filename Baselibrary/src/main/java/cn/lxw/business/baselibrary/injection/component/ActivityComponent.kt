@@ -1,6 +1,7 @@
 package cn.lxw.business.baselibrary.injection.component
 
 import android.app.Activity
+import android.content.Context
 import cn.lxw.business.baselibrary.injection.ActivityScope
 import cn.lxw.business.baselibrary.injection.module.ActivityModule
 import cn.lxw.business.baselibrary.injection.module.LifeCycleProviderModule
@@ -19,6 +20,9 @@ import dagger.Component
 @ActivityScope
 @Component(dependencies = [(AppComponent::class)], modules = [(ActivityModule::class), (LifeCycleProviderModule::class)])
 interface ActivityComponent {
+
+    fun context(): Context
+
     fun activity(): Activity
     fun lifeCycleProviderModule(): LifecycleProvider<*>
 }

@@ -1,5 +1,6 @@
 package cn.lxw.business.user.presenter
 
+import android.util.Log
 import cn.lxw.business.baselibrary.ext.execute
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
@@ -22,6 +23,13 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     lateinit var userService: UserService
 
     fun register(mobile: String, verifyCode: String) {
+
+
+        if (!checkNetWorkAvailable()) {
+            Log.d("TAG", "网络不可用")
+            return
+        }
+
 
         mView.showLoading()
 

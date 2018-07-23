@@ -15,7 +15,7 @@ import javax.inject.Singleton
  * 功能描述：
  */
 @Singleton
-@Component(modules = arrayOf(AppModule::class))
+@Component(modules = [(AppModule::class)])
 interface AppComponent {
     fun context(): Context
 }

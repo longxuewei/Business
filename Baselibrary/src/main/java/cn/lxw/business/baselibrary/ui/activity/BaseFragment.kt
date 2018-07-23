@@ -11,5 +11,4 @@ import com.trello.rxlifecycle2.components.support.RxFragment
  * 备注：
  * 功能描述：
  */
-open class BaseFragment : RxFragment() {
-}
+open class BaseFragment : RxFragment()

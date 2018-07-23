@@ -1,7 +1,5 @@
 package cn.lxw.business.baselibrary.presenter.view
 
-import cn.lxw.business.baselibrary.presenter.BasePresenter
-
 /**
  * *******************************
  * 猿代码: Lxw
@@ -11,8 +9,8 @@ import cn.lxw.business.baselibrary.presenter.BasePresenter
  * 备注：
  * 功能描述：
  */
-interface BaseView{
+interface BaseView {
     fun showLoading()
     fun hideLoading()
-    fun onError()
+    fun onError(msg: String)
 }

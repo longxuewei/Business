@@ -9,6 +9,7 @@ import cn.lxw.business.baselibrary.injection.module.LifeCycleProviderModule
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.presenter.view.BaseView
 import cn.lxw.business.baselibrary.widget.ProgressLoading
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -41,7 +42,8 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
         progressDialog.hide()
     }
 
-    override fun onError() {
+    override fun onError(msg: String) {
+        toast(msg)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

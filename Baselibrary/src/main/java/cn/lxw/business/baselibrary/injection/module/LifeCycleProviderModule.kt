@@ -20,7 +20,6 @@ class LifeCycleProviderModule(private val lifecycleProvider: LifecycleProvider<*
      * 提供LifeCycleProvider 用于处理Rx引起的内存泄露问题。
      */
     @Provides
-    fun providesLifecycleProvider(): LifecycleProvider<*> {
-        return lifecycleProvider
-    }
+    fun providesLifecycleProvider(): LifecycleProvider<*> = lifecycleProvider
+
 }
