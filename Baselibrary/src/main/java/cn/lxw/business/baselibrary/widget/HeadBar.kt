@@ -1,90 +1,48 @@
-package com.kotlin.base.widgets
+package cn.lxw.business.baselibrary.widget
 
-import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import cn.lxw.business.baselibrary.R
-import cn.lxw.business.baselibrary.ext.onClick
-
 import kotlinx.android.synthetic.main.layout_header_bar.view.*
 
-/*
-    Header Bar封装
+/**
+ * *******************************
+ * 猿代码: Lxw
+ * Email: China2021@126.com
+ * 时间轴：2018年07月06日 上午8:05
+ * *******************************
+ * 备注：统一封装HeadBar
+ * 功能描述：
  */
-class HeaderBar @JvmOverloads constructor(
+class HeadBar @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    //是否显示"返回"图标
-    private var isShowBack = true
-    //Title文字
-    private var titleText:String? = null
-    //右侧文字
-    private var rightText:String? = null
+    var isShowBack: Boolean = true
+    var titleText: String? = null
+    var rightText: String? = null
 
     init {
-        //获取自定义属性
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.HeaderBar)
-
-        isShowBack = typedArray.getBoolean(R.styleable.HeaderBar_isShowBack,true)
-
-        titleText = typedArray.getString(R.styleable.HeaderBar_titleText)
-        rightText = typedArray.getString(R.styleable.HeaderBar_rightText)
+        val typeArray = context.obtainStyledAttributes(attrs, R.styleable.HeadBar)
+        isShowBack = typeArray.getBoolean(R.styleable.HeadBar_isShowBack, true)
+        titleText = typeArray.getString(R.styleable.HeadBar_titleText)
+        rightText = typeArray.getString(R.styleable.HeadBar_rightText)
 
         initView()
-        typedArray.recycle()
+        typeArray.recycle()
     }
 
-    /*
-        初始化视图
-     */
     private fun initView() {
-        View.inflate(context,R.layout.layout_header_bar,this)
+        View.inflate(context, R.layout.layout_header_bar, this)
 
         mLeftIv.visibility = if (isShowBack) View.VISIBLE else View.GONE
-
-        //标题不为空，设置值
         titleText?.let {
             mTitleTv.text = it
         }
-
-        //右侧文字不为空，设置值
         rightText?.let {
             mRightTv.text = it
-            mRightTv.visibility = View.VISIBLE
         }
-
-        //返回图标默认实现（关闭Activity）
-        mLeftIv.onClick {
-            if (context is Activity){
-                (context as Activity).finish()
-            }
-        }
-
-    }
-
-    /*
-        获取左侧视图
-     */
-    fun getLeftView():ImageView{
-        return mLeftIv
-    }
-
-    /*
-        获取右侧视图
-     */
-    fun getRightView():TextView{
-        return mRightTv
-    }
-
-    /*
-        获取右侧文字
-     */
-    fun getRightText():String{
-        return mRightTv.text.toString()
     }
 }

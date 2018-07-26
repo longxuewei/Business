@@ -13,6 +13,7 @@ buildscript {
     ext.dagger2_version = '2.16'
     ext.rx_lifecycle_version = '2.2.1'
     ext.glide_version = '4.7.1'
+    ext.support_version= '26.1.0'
 
     repositories {
         google()
@@ -27,6 +28,8 @@ buildscript {
     }
 }
 
+
+
 allprojects {
     repositories {
         google()
@@ -39,6 +42,25 @@ allprojects {
 //    }
 
 }
+
+configurations.all {
+
+    //强制指定所有支持库的版本号为：26.1.0
+    resolutionStrategy {
+        force "com.android.support:animated-vector-drawable:${support_version}",
+                "com.android.support:appcompat-v7:${support_version}",
+                "com.android.support:support-annotations:${support_version}",
+                "com.android.support:support-compat:${support_version}",
+                "com.android.support:support-core-ui:${support_version}",
+                "com.android.support:support-core-utils:${support_version}",
+                "com.android.support:support-fragment:${support_version}",
+                "com.android.support:support-media-compat:${support_version}",
+                "com.android.support:support-v4:${support_version}",
+                "com.android.support:support-vector-drawable:${support_version}"
+    }
+}
+
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

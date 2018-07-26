@@ -5,10 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
     <cn.lxw.business.baselibrary.widget.HeadBar
-        style="@style/MatchWrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:isShowBack="false"
-        app:rightText="登录"
+        app:rightText="登陆"
         app:titleText="注册" />
 
     <LinearLayout
@@ -17,6 +19,7 @@
 
         <EditText
             android:id="@+id/etAccount"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
