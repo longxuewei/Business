@@ -1,6 +1,8 @@
 package cn.lxw.business.user.service.impl
 
+import cn.lxw.business.baselibrary.ext.convert
 import cn.lxw.business.baselibrary.ext.convertBoolean
+import cn.lxw.business.user.data.protocol.UserInfo
 import cn.lxw.business.user.data.repository.UserRepository
 import cn.lxw.business.user.service.UserService
 import io.reactivex.Observable
@@ -20,7 +22,16 @@ class UserServiceImpl @Inject constructor() : UserService {
     @Inject
     lateinit var repository: UserRepository
 
-    override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
+
+    override fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo> {
+        return repository.login(mobile,pwd,pushId).convert()
+    }
+
+
+
+    override fun register(mobile: String, pwd: String, verifyCode: String): Observable<Boolean> {
         return repository.register(mobile, pwd, verifyCode).convertBoolean()
     }
+
+
 }

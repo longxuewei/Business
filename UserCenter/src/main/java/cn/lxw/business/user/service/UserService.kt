@@ -1,5 +1,6 @@
 package cn.lxw.business.user.service
 
+import cn.lxw.business.user.data.protocol.UserInfo
 import io.reactivex.Observable
 
 
@@ -19,5 +20,14 @@ interface UserService {
      * [verifyCode]：验证码
      * [pwd]：密码
      */
-    fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean>
+    fun register(mobile: String, pwd: String, verifyCode: String): Observable<Boolean>
+
+
+    /**
+     * 登陆：
+     * [mobile]：手机号/账号
+     * [pwd]：密码
+     * [pushId]：推送ID
+     */
+    fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo>
 }

@@ -1,8 +1,12 @@
 package cn.lxw.business.baselibrary.ext
 
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
+import cn.lxw.business.baselibrary.rx.BaseFuncBoolean
 import cn.lxw.business.baselibrary.rx.BaseObserver
+import cn.lxw.business.baselibrary.widget.DefaultTextWatcher
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,4 +51,17 @@ fun View.onClick(listener: View.OnClickListener) {
  */
 fun View.onClick(method: () -> Unit) {
     this.setOnClickListener { method() }
+}
+
+
+/**
+ * 扩展Button是否可以用
+ */
+fun Button.enable(editText: EditText, method: () -> Boolean) {
+    val button = this
+    editText.addTextChangedListener(object : DefaultTextWatcher() {
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            button.isEnabled = method()
+        }
+    })
 }

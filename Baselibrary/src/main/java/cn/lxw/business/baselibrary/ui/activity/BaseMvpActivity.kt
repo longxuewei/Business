@@ -21,7 +21,7 @@ import javax.inject.Inject
  * 备注：Activity的基类，基于MVP设计模式。持有业务逻辑层（使用依赖注入）
  * 功能描述：
  */
-open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
 
     /** 逻辑层 */
     @Inject
@@ -49,8 +49,11 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initActivityInjection()
+        injectComponent()
         progressDialog = ProgressLoading.create(this)
     }
+
+    abstract fun injectComponent()
 
     private fun initActivityInjection() {
         activityComponent = DaggerActivityComponent.builder().appComponent((application as BaseApplication).appComponent).activityModule(ActivityModule(this))

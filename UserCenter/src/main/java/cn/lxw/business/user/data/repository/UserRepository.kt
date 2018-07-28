@@ -3,7 +3,9 @@ package cn.lxw.business.user.data.repository
 import cn.lxw.business.baselibrary.data.net.RetrofitFactory
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.user.data.api.UserApi
+import cn.lxw.business.user.data.protocol.LoginReq
 import cn.lxw.business.user.data.protocol.RegisterReq
+import cn.lxw.business.user.data.protocol.UserInfo
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -28,4 +30,17 @@ class UserRepository @Inject constructor() {
     fun register(mobile: String, pwd: String, verifyCode: String): Observable<BaseResponse<String>> {
         return RetrofitFactory.instance.create(UserApi::class.java).register(RegisterReq(mobile, pwd, verifyCode))
     }
+
+
+    /**
+     * 登陆
+     * [mobile]：手机号/账号
+     * [pwd]：密码
+     * [pushId]：推送ID
+     */
+    fun login(mobile: String, pwd: String, pushId: String): Observable<BaseResponse<UserInfo>> {
+        return RetrofitFactory.instance.create(UserApi::class.java).login(LoginReq(mobile, pwd, pushId))
+    }
+
+
 }

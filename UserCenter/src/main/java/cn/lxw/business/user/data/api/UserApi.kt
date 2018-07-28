@@ -1,7 +1,9 @@
 package cn.lxw.business.user.data.api
 
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
+import cn.lxw.business.user.data.protocol.LoginReq
 import cn.lxw.business.user.data.protocol.RegisterReq
+import cn.lxw.business.user.data.protocol.UserInfo
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -12,11 +14,16 @@ import retrofit2.http.POST
  * Email: China2021@126.com
  * 时间轴：2018年06月11日 下午11:41
  * *******************************
- * 备注：具体Retrofit所需要的接口层
+ * 备注：具体Retrofit所需要的接口层，用户模块的API
  * 功能描述：
  */
 interface UserApi {
 
     @POST("userCenter/register")
     fun register(@Body req: RegisterReq): Observable<BaseResponse<String>>
+
+    @POST("userCenter/login")
+    fun login(@Body req: LoginReq): Observable<BaseResponse<UserInfo>>
+
+
 }

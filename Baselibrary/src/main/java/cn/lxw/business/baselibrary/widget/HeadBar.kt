@@ -1,10 +1,13 @@
 package cn.lxw.business.baselibrary.widget
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
 import cn.lxw.business.baselibrary.R
+import cn.lxw.business.baselibrary.ext.onClick
 import kotlinx.android.synthetic.main.layout_header_bar.view.*
 
 /**
@@ -44,5 +47,20 @@ class HeadBar @JvmOverloads constructor(
         rightText?.let {
             mRightTv.text = it
         }
+
+
+        //默认finish Activity
+        mLeftIv.onClick {
+            if (context is Activity) {
+                (context as Activity).finish()
+            }
+        }
     }
+
+
+    /**
+     * 获取右边的TextView
+     */
+    fun getRightTextView(): TextView = mRightTv
+
 }

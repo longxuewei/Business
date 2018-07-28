@@ -1,7 +1,7 @@
-package cn.lxw.business.baselibrary.ext
+package cn.lxw.business.baselibrary.rx
 
+import cn.lxw.business.baselibrary.common.ResultCode
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
-import cn.lxw.business.baselibrary.rx.BaseException
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 
@@ -17,7 +17,7 @@ import io.reactivex.functions.Function
 class BaseFuncBoolean<T> : Function<BaseResponse<T>, Observable<Boolean>> {
     override fun apply(t: BaseResponse<T>): Observable<Boolean> {
         return when (t.status) {
-            0 -> Observable.just(true)
+            ResultCode.SUCCESS -> Observable.just(true)
             else -> Observable.error(BaseException(t.status, t.message))
         }
     }

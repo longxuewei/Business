@@ -4,7 +4,8 @@ import android.util.Log
 import cn.lxw.business.baselibrary.ext.execute
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
-import cn.lxw.business.user.presenter.view.RegisterView
+import cn.lxw.business.user.data.protocol.UserInfo
+import cn.lxw.business.user.presenter.view.LoginView
 import cn.lxw.business.user.service.UserService
 import javax.inject.Inject
 
@@ -17,22 +18,28 @@ import javax.inject.Inject
  * 备注： 注册界面的Presenter
  * 功能描述：
  */
-class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
+class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
 
     @Inject
     lateinit var userService: UserService
 
-    fun register(mobile: String, verifyCode: String, pwd: String) {
+
+    /**
+     * 登陆：
+     * [mobile]：手机号/账号
+     * [pwd]：密码
+     * [pushId]：推送ID
+     */
+    fun login(mobile: String, pwd: String, pushId: String) {
         if (!checkNetWorkAvailable()) {
             Log.d("TAG", "网络不可用")
             return
         }
         mView.showLoading()
-        userService.register(mobile, pwd, verifyCode).execute(object : BaseObserver<Boolean>(mView) {
-            override fun onNext(t: Boolean) {
+        userService.login(mobile, pwd, pushId).execute(object : BaseObserver<UserInfo>(mView) {
+            override fun onNext(t: UserInfo) {
                 super.onNext(t)
-                if (t)
-                    mView.onRegisterResult("注册成功")
+                mView.onLoginResult(t)
             }
         }, lifecycleProvider)
     }
