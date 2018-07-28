@@ -19,18 +19,28 @@ import javax.inject.Inject
  */
 class UserServiceImpl @Inject constructor() : UserService {
 
+
     @Inject
     lateinit var repository: UserRepository
 
 
     override fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo> {
-        return repository.login(mobile,pwd,pushId).convert()
+        return repository.login(mobile, pwd, pushId).convert()
     }
-
 
 
     override fun register(mobile: String, pwd: String, verifyCode: String): Observable<Boolean> {
         return repository.register(mobile, pwd, verifyCode).convertBoolean()
+    }
+
+
+    override fun forgetPwd(mobile: String, verifyCode: String): Observable<String> {
+        return repository.forget(mobile, verifyCode).convert()
+    }
+
+
+    override fun resetPwd(pwd: String, confirmPwd: String): Observable<String> {
+        return repository.resetPwd(pwd, confirmPwd).convert()
     }
 
 

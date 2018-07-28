@@ -1,9 +1,7 @@
 package cn.lxw.business.user.data.api
 
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
-import cn.lxw.business.user.data.protocol.LoginReq
-import cn.lxw.business.user.data.protocol.RegisterReq
-import cn.lxw.business.user.data.protocol.UserInfo
+import cn.lxw.business.user.data.protocol.*
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -24,6 +22,12 @@ interface UserApi {
 
     @POST("userCenter/login")
     fun login(@Body req: LoginReq): Observable<BaseResponse<UserInfo>>
+
+    @POST("userCenter/forgetPwd")
+    fun forgetPwd(@Body req: ForgetPwdReq): Observable<BaseResponse<String>>
+
+    @POST("userCenter/resetPwd")
+    fun resetPwd(@Body req: ResetPwdReq): Observable<BaseResponse<String>>
 
 
 }

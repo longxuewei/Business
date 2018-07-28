@@ -30,4 +30,20 @@ interface UserService {
      * [pushId]：推送ID
      */
     fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo>
+
+    /**
+     * 忘记密码：
+     * [mobile]：手机号/账号
+     * [verifyCode]：验证码
+     */
+    fun forgetPwd(mobile: String, verifyCode: String): Observable<String>
+
+    /**
+     * 重置密码：
+     * [pwd]：手机号/账号
+     * [confirmPwd]：验证码
+     */
+    fun resetPwd(pwd: String, confirmPwd: String): Observable<String>
+
+
 }

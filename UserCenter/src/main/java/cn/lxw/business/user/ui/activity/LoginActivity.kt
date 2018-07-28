@@ -47,12 +47,18 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
      */
     override fun onClick(v: View) {
         when (v.id) {
+
+        //登陆
             R.id.btLogin -> {
                 presenter.login(etMobile.text.toString(), etPwd.text.toString(), "")
             }
+
+        //注册
             R.id.mRightTv -> {
                 startActivity<RegisterActivity>()
             }
+        //忘记密码
+            R.id.tvForgetPwd -> startActivity<ForgetPwdActivity>()
         }
     }
 
@@ -66,6 +72,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
         btLogin.enable(etPwd, { isButtonEnable() })
         btLogin.onClick(this)
         mHeaderBar.getRightTextView().onClick(this)
+        tvForgetPwd.onClick(this)
     }
 
 

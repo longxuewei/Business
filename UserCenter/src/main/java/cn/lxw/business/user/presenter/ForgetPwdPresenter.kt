@@ -4,7 +4,7 @@ import android.util.Log
 import cn.lxw.business.baselibrary.ext.execute
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
-import cn.lxw.business.user.presenter.view.RegisterView
+import cn.lxw.business.user.presenter.view.ForgetPwdView
 import cn.lxw.business.user.service.UserService
 import javax.inject.Inject
 
@@ -17,22 +17,21 @@ import javax.inject.Inject
  * 备注： 注册界面的Presenter
  * 功能描述：
  */
-class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
+class ForgetPwdPresenter @Inject constructor() : BasePresenter<ForgetPwdView>() {
 
     @Inject
     lateinit var userService: UserService
 
-    fun register(mobile: String, pwd: String, verifyCode: String) {
+    fun register(mobile: String, verifyCode: String) {
         if (!checkNetWorkAvailable()) {
             Log.d("TAG", "网络不可用")
             return
         }
         mView.showLoading()
-        userService.register(mobile, pwd, verifyCode).execute(object : BaseObserver<Boolean>(mView) {
-            override fun onNext(t: Boolean) {
+        userService.forgetPwd(mobile, verifyCode).execute(object : BaseObserver<String>(mView) {
+            override fun onNext(t: String) {
                 super.onNext(t)
-                if (t)
-                    mView.onRegisterResult("注册成功")
+                mView.onForgetPwdResult(t)
             }
         }, lifecycleProvider)
     }
