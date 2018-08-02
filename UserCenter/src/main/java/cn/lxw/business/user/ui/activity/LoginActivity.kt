@@ -68,8 +68,8 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
      */
     private fun initView() {
         //按钮控制
-        btLogin.enable(etMobile, { isButtonEnable() })
-        btLogin.enable(etPwd, { isButtonEnable() })
+        btLogin.enable(etMobile) { isButtonEnable() }
+        btLogin.enable(etPwd) { isButtonEnable() }
         btLogin.onClick(this)
         mHeaderBar.getRightTextView().onClick(this)
         tvForgetPwd.onClick(this)

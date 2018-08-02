@@ -9,4 +9,4 @@ package cn.lxw.business.user.data.protocol
  * 备注：注册的请求实体，用于封装注册的参数
  * 功能描述：
  */
-data class RegisterReq(val mobile: String, val pwd: String, val verify: String)
+data class RegisterReq(val mobile: String, val pwd: String, val verifyCode: String)
