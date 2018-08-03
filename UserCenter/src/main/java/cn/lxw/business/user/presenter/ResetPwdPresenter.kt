@@ -22,16 +22,17 @@ class ResetPwdPresenter @Inject constructor() : BasePresenter<ResetPwdView>() {
     @Inject
     lateinit var userService: UserService
 
-    fun resetPwd(pwd: String, confirmPwd: String) {
+    fun resetPwd(mobile: String, pwd: String, confirmPwd: String) {
         if (!checkNetWorkAvailable()) {
             Log.d("TAG", "网络不可用")
             return
         }
         mView.showLoading()
-        userService.resetPwd(pwd, confirmPwd).execute(object : BaseObserver<String>(mView) {
-            override fun onNext(t: String) {
+        userService.resetPwd(mobile, pwd, confirmPwd).execute(object : BaseObserver<Boolean>(mView) {
+            override fun onNext(t: Boolean) {
                 super.onNext(t)
-                mView.onResetPwdResult(t)
+                if (t)
+                    mView.onResetPwdResult("验证成功")
             }
         }, lifecycleProvider)
     }

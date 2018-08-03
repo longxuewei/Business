@@ -22,16 +22,17 @@ class ForgetPwdPresenter @Inject constructor() : BasePresenter<ForgetPwdView>() 
     @Inject
     lateinit var userService: UserService
 
-    fun register(mobile: String, verifyCode: String) {
+    fun forgetPwd(mobile: String, verifyCode: String) {
         if (!checkNetWorkAvailable()) {
             Log.d("TAG", "网络不可用")
             return
         }
         mView.showLoading()
-        userService.forgetPwd(mobile, verifyCode).execute(object : BaseObserver<String>(mView) {
-            override fun onNext(t: String) {
+        userService.forgetPwd(mobile, verifyCode).execute(object : BaseObserver<Boolean>(mView) {
+            override fun onNext(t: Boolean) {
                 super.onNext(t)
-                mView.onForgetPwdResult(t)
+                if (t)
+                    mView.onForgetPwdResult("验证成功")
             }
         }, lifecycleProvider)
     }

@@ -26,15 +26,15 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
 
     override fun onForgetPwdResult(result: String) {
         toast(result)
-        startActivity<ResetPwdActivity>()
+        startActivity<ResetPwdActivity>("mobile" to etMobile.text.toString())
+
     }
 
     override fun onClick(v: View) {
         when (v.id) {
         //下一步
             R.id.btNext -> {
-                //TODO 验证 验证码是否一致
-                btNext.onClick { presenter.register(etMobile.text.toString(), etVerifyCode.text.toString()) }
+                presenter.forgetPwd(etMobile.text.toString(), etVerifyCode.text.toString())
             }
 
         //获取验证码
@@ -49,8 +49,6 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forget_pwd)
         initView()
-
-
     }
 
     /**
@@ -58,8 +56,8 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
      */
     private fun initView() {
         //按钮控制
-        btNext.enable(etMobile, { isButtonEnable() })
-        btNext.enable(etVerifyCode, { isButtonEnable() })
+        btNext.enable(etMobile) { isButtonEnable() }
+        btNext.enable(etVerifyCode) { isButtonEnable() }
         btGetVerifyCode.onClick(this)
         btNext.onClick(this)
     }

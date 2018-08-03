@@ -36,14 +36,14 @@ interface UserService {
      * [mobile]：手机号/账号
      * [verifyCode]：验证码
      */
-    fun forgetPwd(mobile: String, verifyCode: String): Observable<String>
+    fun forgetPwd(mobile: String, verifyCode: String): Observable<Boolean>
 
     /**
      * 重置密码：
      * [pwd]：手机号/账号
      * [confirmPwd]：验证码
      */
-    fun resetPwd(pwd: String, confirmPwd: String): Observable<String>
+    fun resetPwd(mobile:String ,pwd: String, confirmPwd: String): Observable<Boolean>
 
 
 }

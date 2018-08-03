@@ -55,8 +55,8 @@ class UserRepository @Inject constructor() {
      * [pwd]：新密码
      * [confirmPwd]：重复新密码
      */
-    fun resetPwd(pwd: String, confirmPwd: String): Observable<BaseResponse<String>> {
-        return RetrofitFactory.instance.create(UserApi::class.java).resetPwd(ResetPwdReq(pwd, confirmPwd))
+    fun resetPwd(mobile: String, pwd: String, confirmPwd: String): Observable<BaseResponse<String>> {
+        return RetrofitFactory.instance.create(UserApi::class.java).resetPwd(ResetPwdReq(mobile, pwd, confirmPwd))
     }
 
 

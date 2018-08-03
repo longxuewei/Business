@@ -9,4 +9,4 @@ package cn.lxw.business.user.data.protocol
  * 备注：重置密码请求实体类
  * 功能描述：
  */
-data class ResetPwdReq(val pwd: String, val pwdConfirm: String)
+data class ResetPwdReq(val mobile: String, val pwd: String, val pwdConfirm: String)

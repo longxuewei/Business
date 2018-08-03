@@ -1,7 +1,6 @@
 package cn.lxw.business.user.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import cn.lxw.business.R
 import cn.lxw.business.baselibrary.ext.enable
 import cn.lxw.business.baselibrary.ext.onClick
@@ -10,6 +9,9 @@ import cn.lxw.business.user.injection.component.DaggerUserComponent
 import cn.lxw.business.user.presenter.ResetPwdPresenter
 import cn.lxw.business.user.presenter.view.ResetPwdView
 import kotlinx.android.synthetic.main.activity_reset_pwd.*
+import org.jetbrains.anko.clearTop
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.toast
 
 /**
@@ -21,21 +23,12 @@ import org.jetbrains.anko.toast
  * 备注：忘记密码
  * 功能描述：
  */
-class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView, View.OnClickListener {
+class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView {
 
     override fun onResetPwdResult(result: String) {
         toast(result)
+        startActivity(intentFor<LoginActivity>().singleTop().clearTop())
     }
-
-    override fun onClick(v: View) {
-        when (v.id) {
-        //确认修改密码
-            R.id.btConfirm -> {
-                btConfirm.onClick { presenter.resetPwd(etPwd.text.toString(), etConfirmPwd.text.toString()) }
-            }
-        }
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,9 +41,11 @@ class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView, Vie
      */
     private fun initView() {
         //按钮控制
-        btConfirm.enable(etPwd, { isButtonEnable() })
-        btConfirm.enable(etConfirmPwd, { isButtonEnable() })
-        btConfirm.onClick(this)
+        btConfirm.enable(etPwd) { isButtonEnable() }
+        btConfirm.enable(etConfirmPwd) { isButtonEnable() }
+        btConfirm.onClick {
+            presenter.resetPwd(intent.getStringExtra("mobile"), etPwd.text.toString(), etConfirmPwd.text.toString())
+        }
     }
 
 
