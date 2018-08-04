@@ -3,10 +3,7 @@ package cn.lxw.business.user.injection.component
 import cn.lxw.business.baselibrary.injection.PerComponentScope
 import cn.lxw.business.baselibrary.injection.component.ActivityComponent
 import cn.lxw.business.user.injection.module.UserModule
-import cn.lxw.business.user.ui.activity.ForgetPwdActivity
-import cn.lxw.business.user.ui.activity.LoginActivity
-import cn.lxw.business.user.ui.activity.RegisterActivity
-import cn.lxw.business.user.ui.activity.ResetPwdActivity
+import cn.lxw.business.user.ui.activity.*
 import dagger.Component
 
 /**
@@ -25,4 +22,5 @@ interface UserComponent {
     fun inject(loginActivity: LoginActivity)
     fun inject(forgetPwdActivity: ForgetPwdActivity)
     fun inject(resetPwdActivity: ResetPwdActivity)
+    fun inject(userInfoActivity: UserInfoActivity)
 }

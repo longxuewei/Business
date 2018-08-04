@@ -78,4 +78,16 @@ dependencies {
 
     //RecycleView
     api "com.android.support:recyclerview-v7:26.1.0"
+
+    //circleImageView
+    api "de.hdodenhof:circleimageview:$circle_imageView_version"
+
+    //takePhoto 4.1.0 有问题，无法导入。
+    api "com.jph.takephoto:takephoto_library:$take_photo_version"
+
+    //弹框框架
+    api "com.bigkoo:alertview:$alertView_version"
+
+    //权限请求框架
+    api "pub.devrel:easypermissions:$easyPermissions_version"
 }

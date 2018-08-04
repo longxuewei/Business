@@ -13,7 +13,11 @@ buildscript {
     ext.dagger2_version = '2.16'
     ext.rx_lifecycle_version = '2.2.1'
     ext.glide_version = '4.7.1'
-    ext.support_version= '26.1.0'
+    ext.support_version = '26.1.0'
+    ext.circle_imageView_version = '2.2.0'
+    ext.take_photo_version = '4.0.3'
+    ext.alertView_version = '1.0.3'
+    ext.easyPermissions_version = '1.2.0'
 
     repositories {
         google()
