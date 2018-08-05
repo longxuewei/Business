@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/ivDialog"
-        style="@style/WrapWrap"
+        style="@style/WrapWrap" android:contentDescription="TODO" 
         android:layout_gravity="center"
         android:background="@drawable/progress_dialog_anim" />
 </LinearLayout>

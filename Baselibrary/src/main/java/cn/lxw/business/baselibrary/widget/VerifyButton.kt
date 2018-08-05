@@ -10,7 +10,7 @@ import cn.lxw.business.baselibrary.R
     获取验证码按钮
     带倒计时
  */
-class VerifyButton(mContext: Context, attrs: AttributeSet) : Button(mContext, attrs) {
+class VerifyButton(mContext: Context, attrs: AttributeSet) : android.support.v7.widget.AppCompatButton(mContext, attrs) {
     private val mHandler: Handler
     private var mCount = 60
     private var mOnVerifyBtnClick: OnVerifyBtnClick? = null

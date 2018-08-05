@@ -21,6 +21,8 @@ import com.jph.takephoto.compress.CompressConfig
 import com.jph.takephoto.model.TResult
 import com.kotlin.base.utils.DateUtils
 import kotlinx.android.synthetic.main.activity_user_info.*
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
 import java.io.File
@@ -38,8 +40,11 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
 
 
     private lateinit var mTakePhoto: TakePhoto
+
     private lateinit var mTempFile: File
 
+    /** 拍照所需要的权限 */
+    private val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +101,10 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
         etUserSign.onClick {}
     }
 
+
+    /**
+     * 显示采集头像的方式Dialog.
+     */
     private fun showAlertView() {
         AlertView("选择图片", "", "取消", null, arrayOf("拍照", "相册"), this, AlertView.Style.ActionSheet, OnItemClickListener { o, position ->
             //是否压缩图片
@@ -115,14 +124,14 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
     /**
      * 获取设置头像需要的权限,添加注解是因为获取到权限之后的流程方便继续执行.
      */
-
+    @AfterPermissionGranted(RC_CAMERA_READ_EXTERNAL_WRITE_EXTERNAL)
     private fun getHeadImageNeedPermissions() {
-        val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         //检测是否有权限
         if (EasyPermissions.hasPermissions(this, *permissions)) {
             createTempFile()
             mTakePhoto.onPickFromCapture(Uri.fromFile(mTempFile))
         } else {
+            //当用户拒绝第一次权限之后,将会弹出由PermissionRequest.Builder出来的对话框.
             EasyPermissions.requestPermissions(PermissionRequest.Builder(this, RC_CAMERA_READ_EXTERNAL_WRITE_EXTERNAL, *permissions)
                     .setNegativeButtonText("不,别这样")
                     .setPositiveButtonText("好的")
@@ -134,22 +143,30 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
 
 
     /**
-     * 获得权限
+     * 权限拒绝
      */
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if (requestCode == RC_CAMERA_READ_EXTERNAL_WRITE_EXTERNAL) {
-            getImage()
+        //当一些权限被拒绝且永久不在提示的时候!
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, permissions.toMutableList())) {
+//            AlertView("获取授权", "我们需要你的授权才能继续工作,请手动打开权限.", null, arrayOf("欣然接受", "残忍拒绝"), null, this, AlertView.Style.Alert, object : OnItemClickListener {
+//                override fun onItemClick(o: Any?, position: Int) {
+//                    if(position==1){
+//
+//                    }
+//                }
+//            }).show()
+            AppSettingsDialog.Builder(this@UserInfoActivity)
+                    .setTitle("请授予我们权限.")
+                    .setRationale("由于你决绝了我们的权限,我们将无法继续工作,请手动打开权限!").build().show()
         }
+        //有的权限被拒绝,但可以二次申请!
     }
 
 
     /**
-     * 拒绝权限
+     * 接受权限回调
      */
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        if (requestCode == RC_CAMERA_READ_EXTERNAL_WRITE_EXTERNAL) {
-
-        }
     }
 
     /**
@@ -173,7 +190,8 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
      */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        //结果交由 EasyPermissions 处理,这里的this参数,是让他回调,带有@AfterPermissionGranted 方法,方便后续流程
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
 

@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/mLeftIv"
         style="@style/WrapMatch"
-        android:paddingLeft="@dimen/common_padding"
+        android:contentDescription="TODO" android:paddingLeft="@dimen/common_padding"
         android:paddingRight="@dimen/common_padding"
         android:src="@drawable/icon_back" />
 
