@@ -2,6 +2,7 @@ package cn.lxw.business.user.injection.component
 
 import cn.lxw.business.baselibrary.injection.PerComponentScope
 import cn.lxw.business.baselibrary.injection.component.ActivityComponent
+import cn.lxw.business.user.injection.module.UploadModule
 import cn.lxw.business.user.injection.module.UserModule
 import cn.lxw.business.user.ui.activity.*
 import dagger.Component
@@ -16,7 +17,7 @@ import dagger.Component
  * 功能描述：
  */
 @PerComponentScope
-@Component(modules = [(UserModule::class)], dependencies = [ActivityComponent::class])
+@Component(modules = [(UserModule::class), (UploadModule::class)], dependencies = [ActivityComponent::class])
 interface UserComponent {
     fun inject(registerActivity: RegisterActivity)
     fun inject(loginActivity: LoginActivity)

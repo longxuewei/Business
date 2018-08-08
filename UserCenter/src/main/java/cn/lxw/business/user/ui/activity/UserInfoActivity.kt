@@ -8,6 +8,7 @@ import android.os.Environment
 import android.util.Log
 import android.view.View
 import cn.lxw.business.R
+import cn.lxw.business.baselibrary.common.BaseConstant
 import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
 import cn.lxw.business.user.injection.component.DaggerUserComponent
@@ -20,6 +21,8 @@ import com.jph.takephoto.app.TakePhotoImpl
 import com.jph.takephoto.compress.CompressConfig
 import com.jph.takephoto.model.TResult
 import com.kotlin.base.utils.DateUtils
+import com.kotlin.base.utils.GlideUtils
+import com.qiniu.android.storage.UploadManager
 import kotlinx.android.synthetic.main.activity_user_info.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -33,15 +36,26 @@ import java.io.File
  * Email： China2021@126.com
  * 时间轴：2018年06月08日 17:38
  ***************************************************
- * 备注：登陆界面
+ * 备注：用户信息界面
  * 功能描述：
  */
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, View.OnClickListener, TakePhoto.TakeResultListener, EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks {
 
 
+    /** 选取照片的框架 */
     private lateinit var mTakePhoto: TakePhoto
 
+    /** 临时文件 */
     private lateinit var mTempFile: File
+
+    /** 七牛云客户端 */
+    private val mUploadManager: UploadManager by lazy { UploadManager() }
+
+    /** 本地选取的文件路径 */
+    private var mLocalFilePath: String? = null
+
+    /** 上传七牛云之后,返回来的图片地址 */
+    private var mRemoteFileUrlPath: String? = null
 
     /** 拍照所需要的权限 */
     private val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -55,6 +69,9 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
     }
 
 
+    /**
+     * 将选取照片的结果交由框架处理
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         mTakePhoto.onActivityResult(requestCode, resultCode, data)
@@ -143,18 +160,17 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
 
 
     /**
+     * 权限同意
+     */
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
+
+
+    /**
      * 权限拒绝
      */
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         //当一些权限被拒绝且永久不在提示的时候!
         if (EasyPermissions.somePermissionPermanentlyDenied(this, permissions.toMutableList())) {
-//            AlertView("获取授权", "我们需要你的授权才能继续工作,请手动打开权限.", null, arrayOf("欣然接受", "残忍拒绝"), null, this, AlertView.Style.Alert, object : OnItemClickListener {
-//                override fun onItemClick(o: Any?, position: Int) {
-//                    if(position==1){
-//
-//                    }
-//                }
-//            }).show()
             AppSettingsDialog.Builder(this@UserInfoActivity)
                     .setTitle("请授予我们权限.")
                     .setRationale("由于你决绝了我们的权限,我们将无法继续工作,请手动打开权限!").build().show()
@@ -162,12 +178,6 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
         //有的权限被拒绝,但可以二次申请!
     }
 
-
-    /**
-     * 接受权限回调
-     */
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-    }
 
     /**
      * 再次拒绝,我们的提示
@@ -194,13 +204,6 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-
-    private fun getImage() {
-        createTempFile()
-        mTakePhoto.onPickFromCapture(Uri.fromFile(mTempFile))
-    }
-
-
     /**
      * 实现依赖注入
      */
@@ -212,26 +215,59 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
     override fun takeSuccess(result: TResult?) {
         Log.d("TakePhoto", result?.image?.originalPath)//原始图片地址
         Log.d("TakePhoto", result?.image?.compressPath)//压缩图片地址
+        result?.image?.let {
+            mLocalFilePath = it.compressPath
+            presenter.getUploadToken()
+        }
+
     }
 
+    /**
+     * 取消选择
+     */
     override fun takeCancel() {
 
     }
 
+    /**
+     * 获取图片失败
+     */
     override fun takeFail(result: TResult?, msg: String?) {
         Log.d("TakePhoto", msg)
     }
 
+
+    /**
+     * 创建临时文件
+     */
     private fun createTempFile() {
         val tempFile = "${DateUtils.curTime}.png"
         if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
             this.mTempFile = File(Environment.getExternalStorageDirectory(), tempFile)
             return
         }
+        //没有内存卡.直接在FileDir里面创建
         this.mTempFile = File(filesDir, tempFile)
     }
 
+
+    /**
+     * 获取Token回调
+     * [result]: Token
+     */
+    override fun getUploadTokenResult(result: String) {
+        mLocalFilePath?.let {
+            mUploadManager.put(it, null, result, { _, _, response ->
+                mRemoteFileUrlPath = BaseConstant.IMAGE_SERVER_ADDRESS + response?.get("hash")
+                GlideUtils.loadUrlImage(this@UserInfoActivity, mRemoteFileUrlPath!!, cliUserHeadImage)
+            }, null)
+
+        }
+    }
+
     companion object {
+        /** 请求权限的回调码 */
         const val RC_CAMERA_READ_EXTERNAL_WRITE_EXTERNAL = 0x01
     }
 }
+

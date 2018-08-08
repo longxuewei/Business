@@ -11,7 +11,13 @@ package cn.lxw.business.baselibrary.common
  */
 class BaseConstant {
     companion object {
+        /** 七牛云存储地址 */
+        const val IMAGE_SERVER_ADDRESS = "http://osea2fxp7.bkt.clouddn.com/"
+
+        /** 服务器地址 */
         const val SERVICE_ADDRESS = "http://139.159.161.40:8080/Kotlin_Server/"
+
+        /** Sp 文件名 */
         val TABLE_PREFS: String = "TABLE_PREFS"
     }
 }

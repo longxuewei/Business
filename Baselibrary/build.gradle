@@ -90,4 +90,7 @@ dependencies {
 
     //权限请求框架
     api "pub.devrel:easypermissions:$easyPermissions_version"
+
+    //七牛云存储
+    api "com.qiniu:qiniu-android-sdk:7.3.+"
 }

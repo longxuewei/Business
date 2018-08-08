@@ -1,7 +1,6 @@
 package cn.lxw.business.user.presenter.view
 
 import cn.lxw.business.baselibrary.presenter.view.BaseView
-import cn.lxw.business.user.data.protocol.UserInfo
 
 /**
  * *******************************
@@ -13,5 +12,5 @@ import cn.lxw.business.user.data.protocol.UserInfo
  * 功能描述：
  */
 interface UserInfoView : BaseView {
-
+    fun getUploadTokenResult(result: String)
 }
