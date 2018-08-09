@@ -1,5 +1,6 @@
 package cn.lxw.business.user.service
 
+import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.user.data.protocol.UserInfo
 import io.reactivex.Observable
 
@@ -43,7 +44,16 @@ interface UserService {
      * [pwd]：手机号/账号
      * [confirmPwd]：验证码
      */
-    fun resetPwd(mobile:String ,pwd: String, confirmPwd: String): Observable<Boolean>
+    fun resetPwd(mobile: String, pwd: String, confirmPwd: String): Observable<Boolean>
+
+    /**
+     * 修改用户信息
+     * [userIcon]: 用户头像地址
+     * [userName]: 用户昵称
+     * [userGender]: 用户性别
+     * [userSign]: 用户签名
+     */
+    fun editUser(userIcon: String, userName: String, userGender: String, userSign: String): Observable<UserInfo>
 
 
 }

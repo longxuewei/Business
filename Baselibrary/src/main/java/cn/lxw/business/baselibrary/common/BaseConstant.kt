@@ -18,6 +18,9 @@ class BaseConstant {
         const val SERVICE_ADDRESS = "http://139.159.161.40:8080/Kotlin_Server/"
 
         /** Sp 文件名 */
-        val TABLE_PREFS: String = "TABLE_PREFS"
+        const val TABLE_PREFS: String = "TABLE_PREFS"
+
+        /** 用户Token Key*/
+        const val KEY_SP_TOKEN = "token"
     }
 }

@@ -9,6 +9,7 @@ import android.widget.TextView
 import cn.lxw.business.baselibrary.R
 import cn.lxw.business.baselibrary.ext.onClick
 import kotlinx.android.synthetic.main.layout_header_bar.view.*
+import org.jetbrains.anko.find
 
 /**
  * *******************************
@@ -61,6 +62,8 @@ class HeadBar @JvmOverloads constructor(
     /**
      * 获取右边的TextView
      */
-    fun getRightTextView(): TextView = mRightTv
+    fun getRightTextView(): TextView {
+        return find(R.id.mRightTv)
+    }
 
 }

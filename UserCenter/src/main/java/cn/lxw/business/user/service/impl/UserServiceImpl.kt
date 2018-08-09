@@ -1,5 +1,6 @@
 package cn.lxw.business.user.service.impl
 
+import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.baselibrary.ext.convert
 import cn.lxw.business.baselibrary.ext.convertBoolean
 import cn.lxw.business.user.data.protocol.UserInfo
@@ -39,9 +40,13 @@ class UserServiceImpl @Inject constructor() : UserService {
     }
 
 
-    override fun resetPwd(mobile:String ,pwd: String, confirmPwd: String): Observable<Boolean> {
-        return repository.resetPwd(mobile,pwd, confirmPwd).convertBoolean()
+    override fun resetPwd(mobile: String, pwd: String, confirmPwd: String): Observable<Boolean> {
+        return repository.resetPwd(mobile, pwd, confirmPwd).convertBoolean()
     }
 
+
+    override fun editUser(userIcon: String, userName: String, userGender: String, userSign: String): Observable<UserInfo> {
+        return repository.editUser(userIcon, userName, userGender, userSign).convert()
+    }
 
 }

@@ -77,6 +77,7 @@ class RetrofitFactory private constructor() {
             val request = it.request().newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("charset", "utf-8")
+                    .addHeader("token", if (BaseConstant.KEY_SP_TOKEN.isEmpty()) "" else BaseConstant.KEY_SP_TOKEN)
                     .build()
             it.proceed(request)
         }

@@ -1,5 +1,7 @@
 package cn.lxw.business.user.ui.activity
 
+import ProviderConstant
+import UserPrefsUtils
 import android.Manifest
 import android.content.Intent
 import android.net.Uri
@@ -11,6 +13,7 @@ import cn.lxw.business.R
 import cn.lxw.business.baselibrary.common.BaseConstant
 import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
+import cn.lxw.business.user.data.protocol.UserInfo
 import cn.lxw.business.user.injection.component.DaggerUserComponent
 import cn.lxw.business.user.presenter.UserInfoPresenter
 import cn.lxw.business.user.presenter.view.UserInfoView
@@ -20,10 +23,12 @@ import com.jph.takephoto.app.TakePhoto
 import com.jph.takephoto.app.TakePhotoImpl
 import com.jph.takephoto.compress.CompressConfig
 import com.jph.takephoto.model.TResult
+import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.base.utils.DateUtils
 import com.kotlin.base.utils.GlideUtils
 import com.qiniu.android.storage.UploadManager
 import kotlinx.android.synthetic.main.activity_user_info.*
+import org.jetbrains.anko.toast
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -57,6 +62,11 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
     /** 上传七牛云之后,返回来的图片地址 */
     private var mRemoteFileUrlPath: String? = null
 
+    private var mUserIcon: String? = null
+    private var mUserGender: String? = null
+    private var mUserName: String? = null
+    private var mUserSign: String? = null
+
     /** 拍照所需要的权限 */
     private val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
@@ -66,6 +76,33 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
         mTakePhoto = TakePhotoImpl(this, this)
         mTakePhoto.onCreate(savedInstanceState)
         initView()
+        initData()
+    }
+
+    private fun initData() {
+        mUserIcon = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_ICON)
+        mUserGender = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_GENDER)
+        mUserName = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_NAME)
+        mUserSign = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_SIGN)
+
+        mRemoteFileUrlPath = mUserIcon
+        mUserIcon?.let {
+            if (it.isNotEmpty()) {
+
+                GlideUtils.loadUrlImage(this, it, cliUserHeadImage)
+            }
+        }
+
+        if (mUserGender == "0") {
+            rbMale.isChecked = true
+        } else {
+            rbFemale.isChecked = true
+        }
+
+        tvUserMobile.text = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_MOBILE)
+        etUserName.setText(mUserName)
+        etUserSign.setText(mUserSign)
+
     }
 
 
@@ -108,6 +145,10 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
     private fun initView() {
         rlUserHeadImage.onClick {
             showAlertView()
+        }
+        mHeaderBar.getRightTextView().onClick {
+            presenter.editUser(mRemoteFileUrlPath!!, etUserName.text.toString()
+                    ?: "", if (rbMale.isChecked) "0" else "1", etUserSign.text.toString())
         }
         mArrowIv.onClick {}
         cliUserHeadImage.onClick {}
@@ -255,7 +296,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
      * 获取Token回调
      * [result]: Token
      */
-    override fun getUploadTokenResult(result: String) {
+    override fun onUploadTokenResult(result: String) {
         mLocalFilePath?.let {
             mUploadManager.put(it, null, result, { _, _, response ->
                 mRemoteFileUrlPath = BaseConstant.IMAGE_SERVER_ADDRESS + response?.get("hash")
@@ -269,5 +310,15 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
         /** 请求权限的回调码 */
         const val RC_CAMERA_READ_EXTERNAL_WRITE_EXTERNAL = 0x01
     }
+
+
+    /**
+     * 更新用户信息回调
+     */
+    override fun onEditUserResult(result: UserInfo) {
+        UserPrefsUtils.putUserInfo(result)
+        toast("更新用户信息成功")
+    }
+
 }
 

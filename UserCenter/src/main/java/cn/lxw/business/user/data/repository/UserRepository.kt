@@ -60,4 +60,15 @@ class UserRepository @Inject constructor() {
     }
 
 
+    /**
+     * 修改用户信息
+     * [userIcon]: 用户头像地址
+     * [userName]: 用户昵称
+     * [userGender]: 用户性别
+     * [userSign]: 用户签名
+     */
+    fun editUser(userIcon: String, userName: String, userGender: String, userSign: String): Observable<BaseResponse<UserInfo>> {
+        return RetrofitFactory.instance.create(UserApi::class.java).editUser(EditUserReq(userIcon, userName, userGender, userSign))
+    }
+
 }

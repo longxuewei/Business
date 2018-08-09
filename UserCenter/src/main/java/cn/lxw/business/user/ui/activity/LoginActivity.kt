@@ -1,5 +1,6 @@
 package cn.lxw.business.user.ui.activity
 
+import UserPrefsUtils
 import android.os.Bundle
 import android.view.View
 import cn.lxw.business.R
@@ -12,7 +13,6 @@ import cn.lxw.business.user.presenter.LoginPresenter
 import cn.lxw.business.user.presenter.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 /**
  ***************************************************
@@ -37,7 +37,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
      * 登陆回调
      */
     override fun onLoginResult(result: UserInfo) {
-        toast(result.toString())
+        UserPrefsUtils.putUserInfo(result)
         startActivity<UserInfoActivity>()
     }
 
