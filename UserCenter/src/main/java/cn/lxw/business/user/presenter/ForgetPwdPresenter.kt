@@ -6,6 +6,7 @@ import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
 import cn.lxw.business.user.presenter.view.ForgetPwdView
 import cn.lxw.business.user.service.UserService
+import com.orhanobut.logger.Logger
 import javax.inject.Inject
 
 /**
@@ -24,7 +25,7 @@ class ForgetPwdPresenter @Inject constructor() : BasePresenter<ForgetPwdView>() 
 
     fun forgetPwd(mobile: String, verifyCode: String) {
         if (!checkNetWorkAvailable()) {
-            Log.d("TAG", "网络不可用")
+            Logger.d("网络不可用")
             return
         }
         mView.showLoading()

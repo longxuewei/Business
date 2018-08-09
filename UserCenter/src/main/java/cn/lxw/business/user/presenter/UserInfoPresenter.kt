@@ -1,6 +1,5 @@
 package cn.lxw.business.user.presenter
 
-import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.baselibrary.ext.execute
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver

@@ -18,6 +18,8 @@ buildscript {
     ext.take_photo_version = '4.0.3'
     ext.alertView_version = '1.0.3'
     ext.easyPermissions_version = '1.2.0'
+    ext.qiniu_version = "7.3.+"
+    ext.logger_version = "2.2.0"
 
     repositories {
         google()

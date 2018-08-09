@@ -1,12 +1,12 @@
 package cn.lxw.business.user.presenter
 
-import android.util.Log
 import cn.lxw.business.baselibrary.ext.execute
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
 import cn.lxw.business.user.data.protocol.UserInfo
 import cn.lxw.business.user.presenter.view.LoginView
 import cn.lxw.business.user.service.UserService
+import com.orhanobut.logger.Logger
 import javax.inject.Inject
 
 /**
@@ -32,7 +32,7 @@ class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
      */
     fun login(mobile: String, pwd: String, pushId: String) {
         if (!checkNetWorkAvailable()) {
-            Log.d("TAG", "网络不可用")
+            Logger.e("网络不可用")
             return
         }
         mView.showLoading()

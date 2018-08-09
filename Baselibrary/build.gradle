@@ -92,5 +92,10 @@ dependencies {
     api "pub.devrel:easypermissions:$easyPermissions_version"
 
     //七牛云存储
-    api "com.qiniu:qiniu-android-sdk:7.3.+"
+    api "com.qiniu:qiniu-android-sdk:$qiniu_version"
+
+
+    api "com.orhanobut:logger:$logger_version"
+
+
 }

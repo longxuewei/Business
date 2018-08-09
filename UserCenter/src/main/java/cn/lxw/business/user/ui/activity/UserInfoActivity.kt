@@ -26,6 +26,7 @@ import com.jph.takephoto.model.TResult
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.base.utils.DateUtils
 import com.kotlin.base.utils.GlideUtils
+import com.orhanobut.logger.Logger
 import com.qiniu.android.storage.UploadManager
 import kotlinx.android.synthetic.main.activity_user_info.*
 import org.jetbrains.anko.toast
@@ -224,14 +225,14 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
      * 再次拒绝,我们的提示
      */
     override fun onRationaleDenied(requestCode: Int) {
-        Log.d("EasyPermissions", "你拒绝了权限,请在设置中打开权限,我们才能继续")
+        Logger.d("你拒绝了权限,请在设置中打开权限,我们才能继续")
     }
 
     /**
      * 同意了我们的二次请求
      */
     override fun onRationaleAccepted(requestCode: Int) {
-        Log.d("EasyPermissions", "继续")
+        Logger.d( "继续")
         getHeadImageNeedPermissions()
     }
 
@@ -254,8 +255,8 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
     }
 
     override fun takeSuccess(result: TResult?) {
-        Log.d("TakePhoto", result?.image?.originalPath)//原始图片地址
-        Log.d("TakePhoto", result?.image?.compressPath)//压缩图片地址
+        Logger.e(result?.image?.compressPath?:"压缩图片地址为空.")
+        Logger.e(result?.image?.originalPath?:"正常图片地址为空.")
         result?.image?.let {
             mLocalFilePath = it.compressPath
             presenter.getUploadToken()
@@ -274,7 +275,8 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
      * 获取图片失败
      */
     override fun takeFail(result: TResult?, msg: String?) {
-        Log.d("TakePhoto", msg)
+        Logger.d(msg?:"获取图片失败")//压缩图片地址
+
     }
 
 

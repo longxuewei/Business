@@ -6,6 +6,7 @@ import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
 import cn.lxw.business.user.presenter.view.RegisterView
 import cn.lxw.business.user.service.UserService
+import com.orhanobut.logger.Logger
 import javax.inject.Inject
 
 /**
@@ -24,7 +25,7 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
 
     fun register(mobile: String, pwd: String, verifyCode: String) {
         if (!checkNetWorkAvailable()) {
-            Log.d("TAG", "网络不可用")
+            Logger.e("网络不可用")
             return
         }
         mView.showLoading()
