@@ -3,10 +3,7 @@ package cn.lxw.business.ui.activity
 import android.os.Bundle
 import cn.lxw.business.R
 import cn.lxw.business.baselibrary.ui.activity.BaseActivity
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.concurrent.TimeUnit
+import cn.lxw.business.ui.fragment.HomeFragment
 
 /**
  ***************************************************
@@ -19,21 +16,15 @@ import java.util.concurrent.TimeUnit
  */
 class MainActivity : BaseActivity() {
 
+    private val mHomeFragment by lazy { HomeFragment() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initView()
+    }
 
-        Observable.timer(3, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    mNavigationNb.checkCartBadge(20)
-                }
-
-
-        Observable.timer(7, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    mNavigationNb.checkMessageBadge(true)
-                }
+    private fun initView() {
+        supportFragmentManager.beginTransaction().replace(R.id.homeContainer, mHomeFragment).commit()
     }
 }
