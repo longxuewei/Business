@@ -94,8 +94,10 @@ dependencies {
     //七牛云存储
     api "com.qiniu:qiniu-android-sdk:$qiniu_version"
 
-
+    //日志打印工具
     api "com.orhanobut:logger:$logger_version"
 
+    //主页底部导航栏
+    api "com.ashokvarma.android:bottom-navigation-bar:$bottomNavigation_version"
 
 }

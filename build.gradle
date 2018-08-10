@@ -20,6 +20,7 @@ buildscript {
     ext.easyPermissions_version = '1.2.0'
     ext.qiniu_version = "7.3.+"
     ext.logger_version = "2.2.0"
+    ext.bottomNavigation_version = "2.0.4"
 
     repositories {
         google()
