@@ -44,6 +44,10 @@ dependencies {
     if (isUserModel.toBoolean()) {
         implementation project(':UserCenter')
     }
+
+    if (isMessageCenterModel.toBoolean()) {
+        implementation project(":MessageCenter")
+    }
 }
 
 

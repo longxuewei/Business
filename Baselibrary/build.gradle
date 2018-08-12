@@ -100,6 +100,7 @@ dependencies {
     //主页底部导航栏
     api "com.ashokvarma.android:bottom-navigation-bar:$bottomNavigation_version"
 
+    //主页的banner
     api "com.youth.banner:banner:${banner_version}"
 
 }

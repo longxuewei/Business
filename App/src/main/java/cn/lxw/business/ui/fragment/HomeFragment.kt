@@ -32,6 +32,11 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBanner()
+        initNewsData()
+    }
+
+    private fun initNewsData() {
+        mNewsFlipperView.setData(arrayOf("这是第一条通知", "这是第二条通知"))
     }
 
     private fun initBanner() {
