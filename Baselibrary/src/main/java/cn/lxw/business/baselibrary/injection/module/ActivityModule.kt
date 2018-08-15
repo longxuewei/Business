@@ -4,7 +4,6 @@ import android.app.Activity
 import cn.lxw.business.baselibrary.injection.ActivityScope
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
  * *******************************

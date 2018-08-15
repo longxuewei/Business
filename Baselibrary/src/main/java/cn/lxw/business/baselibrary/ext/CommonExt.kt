@@ -1,16 +1,22 @@
 package cn.lxw.business.baselibrary.ext
 
+import android.graphics.drawable.AnimationDrawable
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import cn.lxw.business.baselibrary.R
 import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.baselibrary.rx.BaseFuncBoolean
 import cn.lxw.business.baselibrary.rx.BaseObserver
 import cn.lxw.business.baselibrary.widget.DefaultTextWatcher
+import com.kennyc.view.MultiStateView
+import com.kotlin.base.utils.GlideUtils
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.find
 
 /**
  * *******************************
@@ -64,4 +70,29 @@ fun Button.enable(editText: EditText, method: () -> Boolean) {
             button.isEnabled = method()
         }
     })
+}
+
+/**
+ * 扩展所有的ImageView拥有加载显示图片的功能
+ * [url]: 图片URL
+ */
+fun ImageView.loadUrl(url: String) {
+    GlideUtils.loadUrlImage(context, url, this)
+}
+
+
+/**
+ * 多状态视图的封装
+ */
+fun MultiStateView.startLoading() {
+    viewState = MultiStateView.VIEW_STATE_LOADING
+    (this.find<View>(R.id.loading_anim_view).background as AnimationDrawable).start()
+}
+
+
+/**
+ * 设置是否隐藏
+ */
+fun View.setVisibility(isGone: Boolean) {
+    this.visibility = if (isGone) View.GONE else View.VISIBLE
 }

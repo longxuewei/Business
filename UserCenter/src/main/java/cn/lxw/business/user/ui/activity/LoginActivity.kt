@@ -38,7 +38,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
      */
     override fun onLoginResult(result: UserInfo) {
         UserPrefsUtils.putUserInfo(result)
-        startActivity<UserInfoActivity>()
+        finish()
     }
 
 

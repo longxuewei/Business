@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import cn.lxw.business.baselibrary.common.BaseApplication
 import cn.lxw.business.baselibrary.injection.component.ActivityComponent
 import cn.lxw.business.baselibrary.injection.component.DaggerActivityComponent
+import cn.lxw.business.baselibrary.injection.module.ActivityModule
 import cn.lxw.business.baselibrary.injection.module.LifeCycleProviderModule
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.presenter.view.BaseView
@@ -44,8 +45,8 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        injectComponent()
         initActivityInjection()
+        injectComponent()
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -56,6 +57,7 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
         activityComponent = DaggerActivityComponent
                 .builder()
                 .appComponent((activity?.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(activity))
                 .lifeCycleProviderModule(LifeCycleProviderModule(this))
                 .build()
     }

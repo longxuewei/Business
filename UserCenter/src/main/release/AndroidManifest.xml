@@ -12,8 +12,9 @@
         android:supportsRtl="true">
         <activity android:name=".user.ui.activity.RegisterActivity" />
 
-        <activity android:name=".user.ui.activity.RegisterActivity" />
         <activity android:name=".user.ui.activity.LoginActivity" />
+
+        <activity android:name=".user.ui.activity.UserInfoActivity"/>
     </application>
 
 
