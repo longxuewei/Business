@@ -11,15 +11,18 @@ import cn.lxw.business.baselibrary.ext.startLoading
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpFragment
 import cn.lxw.business.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.lxw.business.goods.R
+import cn.lxw.business.goods.common.GoodsConstant
 import cn.lxw.business.goods.data.protocol.Category
 import cn.lxw.business.goods.injection.component.DaggerCategoryComponent
 import cn.lxw.business.goods.injection.module.CategoryModule
 import cn.lxw.business.goods.presenter.CategoryPresenter
 import cn.lxw.business.goods.presenter.view.CategoryView
+import cn.lxw.business.goods.ui.activity.GoodsListActivity
 import cn.lxw.business.goods.ui.adapter.SecondCategoryAdapter
 import cn.lxw.business.goods.ui.adapter.TopCategoryAdapter
 import com.kennyc.view.MultiStateView
 import kotlinx.android.synthetic.main.fragment_category.*
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * *******************************
@@ -77,22 +80,11 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
         mSecondCategoryRv.adapter = mSecondCategoryAdapter
         mSecondCategoryAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Category> {
             override fun onItemClick(item: Category, position: Int) {
-                TODO()
+                startActivity<GoodsListActivity>(GoodsConstant.KEY_GOODS_CATEGORY_ID to item.id)
             }
         })
     }
 
-//
-//    /**
-//     * 懒加载
-//     * [isVisibleToUser]: 对于用户是否可见
-//     */
-//    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-//        super.setUserVisibleHint(isVisibleToUser)
-//        if (isVisibleToUser && mTopCategoryAdapter.itemCount == 0 || mSecondCategoryAdapter.itemCount == 0) {
-//            loadData()
-//        }
-//    }
 
     override fun onGetCategoryResult(result: MutableList<Category>?) {
         result?.let {

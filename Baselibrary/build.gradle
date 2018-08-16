@@ -114,4 +114,7 @@ dependencies {
 
     //RecyclerView多状态视图
     api "com.github.Kennyc1012:MultiStateView:${multiStateView_version}"
+
+    //下拉刷新框架
+    api "cn.bingoogolapple:bga-refreshlayout:${bgaRefreshLayout_version}"
 }

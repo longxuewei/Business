@@ -3,12 +3,12 @@
     package="cn.lxw.business">
 
     <application
+        android:name=".baselibrary.common.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".baselibrary.common.BaseApplication"
         android:theme="@style/AppTheme">
 
 
@@ -20,6 +20,7 @@
         </activity>
 
         <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".goods.ui.activity.GoodsListActivity" />
 
     </application>
 
