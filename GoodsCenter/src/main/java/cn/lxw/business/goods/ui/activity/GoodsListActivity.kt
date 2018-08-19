@@ -6,7 +6,9 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import cn.lxw.business.baselibrary.ext.startLoading
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
+import cn.lxw.business.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.lxw.business.goods.R
+import cn.lxw.business.goods.common.GoodsConstant
 import cn.lxw.business.goods.common.GoodsConstant.Companion.KEY_GOODS_CATEGORY_ID
 import cn.lxw.business.goods.injection.component.DaggerGoodsComponent
 import cn.lxw.business.goods.injection.module.GoodsModule
@@ -16,6 +18,7 @@ import cn.lxw.business.goods.ui.adapter.GoodsAdapter
 import com.kennyc.view.MultiStateView
 import com.kotlin.goods.data.protocol.Goods
 import kotlinx.android.synthetic.main.activity_goods.*
+import org.jetbrains.anko.startActivity
 
 /**
  * *******************************
@@ -52,11 +55,21 @@ class GoodsListActivity : BaseMvpActivity<GoodsPresenter>(), GoodsListView, BGAR
         adapter = GoodsAdapter(this)
         mGoodsRv.layoutManager = GridLayoutManager(this, 2)
         mGoodsRv.adapter = adapter
+        adapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Goods> {
+            override fun onItemClick(item: Goods, position: Int) {
+                startActivity<GoodsDetailActivity>(GoodsConstant.KEY_GOODS_ID to item.id)
+            }
+        })
     }
 
     private fun loadData() {
+        //关键字
         mMultiStateView.startLoading()
-        presenter.getGoodsList(intent.getIntExtra(KEY_GOODS_CATEGORY_ID, 1), currentPage)
+        if (intent.getIntExtra(GoodsConstant.KEY_SEARCH_GOODS_TYPE, 0) != 0) {
+            presenter.getGoodsListByKeyword(intent.getStringExtra(GoodsConstant.KEY_GOODS_KEYWORD), currentPage)
+        } else {
+            presenter.getGoodsList(intent.getIntExtra(KEY_GOODS_CATEGORY_ID, 1), currentPage)
+        }
     }
 
     override fun injectComponent() {

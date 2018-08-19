@@ -21,6 +21,8 @@
 
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".goods.ui.activity.GoodsListActivity" />
+        <activity android:name=".goods.ui.activity.SearchGoodsActivity" />
+        <activity android:name=".goods.ui.activity.GoodsDetailActivity" />
 
     </application>
 

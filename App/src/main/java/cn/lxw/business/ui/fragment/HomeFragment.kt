@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import cn.lxw.business.R
 import cn.lxw.business.baselibrary.common.*
+import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseFragment
 import cn.lxw.business.baselibrary.widget.BannerImageLoader
+import cn.lxw.business.goods.ui.activity.SearchGoodsActivity
 import cn.lxw.business.ui.adapter.HomeDiscountAdapter
 import cn.lxw.business.ui.adapter.TopicAdapter
 import com.kotlin.mall.common.*
@@ -16,6 +18,7 @@ import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.crosswall.lib.coverflow.CoverFlow
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  ***************************************************
@@ -36,10 +39,18 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initView()
         initBanner()
         initNewsData()
         initDiscount()
         initTopic()
+    }
+
+    private fun initView() {
+        mSearchEt.onClick {
+            startActivity<SearchGoodsActivity>()
+        }
     }
 
 

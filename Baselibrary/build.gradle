@@ -117,4 +117,9 @@ dependencies {
 
     //下拉刷新框架
     api "cn.bingoogolapple:bga-refreshlayout:${bgaRefreshLayout_version}"
+
+    //支持库(使用TabLayout)
+    api "com.android.support:design:${support_version}"
+
+    api "com.eightbitlab:rxbus:${rxbus_version}"
 }

@@ -13,5 +13,27 @@ import io.reactivex.Observable
  * 功能描述：
  */
 interface GoodsService {
-    fun getGoodsList(categoryId: Int, pageNo: Int):Observable<MutableList<Goods>?>
+
+    /**
+     * 获取商品列表
+     * [categoryId]:分类ID
+     * [pageNo]: 页码
+     */
+    fun getGoodsList(categoryId: Int, pageNo: Int): Observable<MutableList<Goods>?>
+
+
+    /**
+     * 根据关键字查询商品
+     * [keyword]: 关键字
+     * [pageNo]: 页码
+     */
+    fun getGoodsListByKeyword(keyword: String, pageNo: Int): Observable<MutableList<Goods>?>
+
+
+    /**
+     * 获取商品详情
+     */
+    fun getGoodsDetail(goodsId: Int): Observable<Goods>
+
+
 }
