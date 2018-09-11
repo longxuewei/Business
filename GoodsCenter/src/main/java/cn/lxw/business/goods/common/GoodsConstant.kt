@@ -23,5 +23,7 @@ class GoodsConstant {
         const val KEY_GOODS_KEYWORD = "goods_keyword"
         /** 商品ID */
         const val KEY_GOODS_ID = "goods_id"
+        /** sku分隔标识 */
+        const val SKU_SEPARATOR = ","
     }
 }

@@ -121,5 +121,12 @@ dependencies {
     //支持库(使用TabLayout)
     api "com.android.support:design:${support_version}"
 
+    //Fragment之间传值
     api "com.eightbitlab:rxbus:${rxbus_version}"
+
+    //sku中的加减商品View
+    api "ren.qinc.numberbutton:numberbutton:${number_button_version}"
+
+    //商品标签单选多选View
+    api "com.hyman:flowlayout-lib:${flowlayout_version}"
 }

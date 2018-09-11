@@ -1,9 +1,11 @@
 package cn.lxw.business.goods.ui.fragment
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpFragment
 import cn.lxw.business.baselibrary.widget.BannerImageLoader
 import cn.lxw.business.goods.R
@@ -12,6 +14,8 @@ import cn.lxw.business.goods.injection.component.DaggerGoodsComponent
 import cn.lxw.business.goods.injection.module.GoodsModule
 import cn.lxw.business.goods.presenter.GoodsDetailPresenter
 import cn.lxw.business.goods.presenter.view.GoodsDetailView
+import cn.lxw.business.goods.ui.activity.GoodsDetailActivity
+import cn.lxw.business.goods.weight.GoodsSkuPopView
 import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.goods.data.protocol.Goods
@@ -32,6 +36,8 @@ import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
 class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), GoodsDetailView {
 
 
+    private lateinit var mSkuPopView: GoodsSkuPopView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_goods_detail_tab_one, container, false)
@@ -40,7 +46,19 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBanner()
+        initView()
+        initSkuPop()
         loadData()
+    }
+
+    private fun initView() {
+        mSkuView.onClick {
+            mSkuPopView.showAtLocation((activity as GoodsDetailActivity).window.decorView.rootView, Gravity.BOTTOM and Gravity.CENTER_HORIZONTAL, 0, 0)
+        }
+    }
+
+    private fun initSkuPop() {
+        mSkuPopView = GoodsSkuPopView(activity as GoodsDetailActivity)
     }
 
     private fun initBanner() {
@@ -69,6 +87,17 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
 
         Bus.send(GoodsDetailImageEvent(result.goodsDetailOne, result.goodsDetailTwo))
 
+        loadSkuPopData(result)
+    }
+
+    /**
+     * 数据到达之后,将sku的数据设置上去
+     */
+    private fun loadSkuPopData(result: Goods) {
+        mSkuPopView.setGoodsCode(result.goodsCode)
+        mSkuPopView.setGoodsIcon(result.goodsDefaultIcon)
+        mSkuPopView.setGoodsPrice(result.goodsDefaultPrice)
+        mSkuPopView.setSkuData(result.goodsSku)
     }
 
 }

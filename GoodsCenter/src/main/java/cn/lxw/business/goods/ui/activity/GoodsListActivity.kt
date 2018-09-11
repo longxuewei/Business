@@ -107,6 +107,11 @@ class GoodsListActivity : BaseMvpActivity<GoodsPresenter>(), GoodsListView, BGAR
         }
     }
 
+    override fun onError(msg: String) {
+        super.onError(msg)
+        mMultiStateView.viewState = MultiStateView.VIEW_STATE_ERROR
+    }
+
     override fun onBGARefreshLayoutBeginRefreshing(refreshLayout: BGARefreshLayout?) {
         currentPage = 1
         loadData()

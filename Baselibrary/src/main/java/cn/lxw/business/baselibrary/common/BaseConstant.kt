@@ -22,5 +22,7 @@ class BaseConstant {
 
         /** 用户Token Key*/
         const val KEY_SP_TOKEN = "token"
+
+
     }
 }
