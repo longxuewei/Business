@@ -14,12 +14,12 @@ import cn.lxw.business.baselibrary.widget.DefaultTextWatcher
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
 import cn.lxw.business.goods.event.SkuChangedEvent
+import cn.lxw.business.goods.ext.getCountEditText
 import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.goods.data.protocol.GoodsSku
 import com.kotlin.goods.event.AddCartEvent
 import kotlinx.android.synthetic.main.layout_sku_pop.view.*
-import org.jetbrains.anko.editText
 
 /*
     商品SKU弹层
@@ -71,7 +71,7 @@ class GoodsSkuPopView(context: Activity) : PopupWindow(context), View.OnClickLis
         mRootView.mAddCartBtn.onClick(this)
 
         mRootView.mSkuCountBtn.setCurrentNumber(1)
-        mRootView.mSkuCountBtn.editText().addTextChangedListener(
+        mRootView.mSkuCountBtn.getCountEditText().addTextChangedListener(
                 object : DefaultTextWatcher() {
                     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                         Bus.send(SkuChangedEvent())

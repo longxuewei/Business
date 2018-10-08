@@ -5,11 +5,15 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import cn.lxw.business.baselibrary.ext.onClick
+import cn.lxw.business.baselibrary.ui.activity.BaseActivity
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpFragment
 import cn.lxw.business.baselibrary.widget.BannerImageLoader
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
+import cn.lxw.business.goods.event.SkuChangedEvent
 import cn.lxw.business.goods.injection.component.DaggerGoodsComponent
 import cn.lxw.business.goods.injection.module.GoodsModule
 import cn.lxw.business.goods.presenter.GoodsDetailPresenter
@@ -17,12 +21,14 @@ import cn.lxw.business.goods.presenter.view.GoodsDetailView
 import cn.lxw.business.goods.ui.activity.GoodsDetailActivity
 import cn.lxw.business.goods.weight.GoodsSkuPopView
 import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.event.GoodsDetailImageEvent
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
+import org.jetbrains.anko.contentView
 
 /**
  * *******************************
@@ -34,6 +40,10 @@ import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
  * 功能描述：
  */
 class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), GoodsDetailView {
+
+    private lateinit var mAnimationStart: ScaleAnimation
+
+    private lateinit var mAnimationEnd: ScaleAnimation
 
 
     private lateinit var mSkuPopView: GoodsSkuPopView
@@ -47,18 +57,25 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         super.onViewCreated(view, savedInstanceState)
         initBanner()
         initView()
+        initAnim()
         initSkuPop()
         loadData()
+        initObserve()
+
     }
 
     private fun initView() {
         mSkuView.onClick {
             mSkuPopView.showAtLocation((activity as GoodsDetailActivity).window.decorView.rootView, Gravity.BOTTOM and Gravity.CENTER_HORIZONTAL, 0, 0)
+            (activity as BaseActivity).contentView?.startAnimation(mAnimationStart)
         }
     }
 
     private fun initSkuPop() {
         mSkuPopView = GoodsSkuPopView(activity as GoodsDetailActivity)
+        mSkuPopView.setOnDismissListener {
+            (activity as BaseActivity).contentView?.startAnimation(mAnimationEnd)
+        }
     }
 
     private fun initBanner() {
@@ -100,4 +117,31 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         mSkuPopView.setSkuData(result.goodsSku)
     }
 
+
+    private fun initObserve() {
+        Bus.observe<SkuChangedEvent>().subscribe {
+            mSkuSelectedTv.text = mSkuPopView.getSelectSku() + GoodsConstant.SKU_SEPARATOR + mSkuPopView.getSelectCount() + "件"
+        }.registerInBus(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
+    }
+
+
+    /*
+              初始化缩放动画
+           */
+    private fun initAnim() {
+        mAnimationStart = ScaleAnimation(
+                1f, 0.95f, 1f, 0.95f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        mAnimationStart.duration = 500
+        mAnimationStart.fillAfter = true
+
+        mAnimationEnd = ScaleAnimation(
+                0.95f, 1f, 0.95f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        mAnimationEnd.duration = 500
+        mAnimationEnd.fillAfter = true
+    }
 }
