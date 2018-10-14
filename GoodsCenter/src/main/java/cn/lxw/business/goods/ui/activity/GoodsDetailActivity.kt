@@ -2,9 +2,12 @@ package cn.lxw.business.goods.ui.activity
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseActivity
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.ui.adapter.GoodsDetailVpAdapter
+import cn.lxw.business.provider.router.RouterPath
+import com.alibaba.android.arouter.launcher.ARouter
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 
 /**
@@ -27,5 +30,8 @@ class GoodsDetailActivity : BaseActivity() {
         mGoodsDetailTab.tabMode = TabLayout.MODE_FIXED
         mGoodsDetailVp.adapter = GoodsDetailVpAdapter(supportFragmentManager, this)
         mGoodsDetailTab.setupWithViewPager(mGoodsDetailVp)
+        mAddCartBtn.onClick {
+            ARouter.getInstance().build(RouterPath.UserCenter.PATH_LOGIN).navigation()
+        }
     }
 }

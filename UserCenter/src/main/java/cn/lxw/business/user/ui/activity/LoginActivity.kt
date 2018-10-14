@@ -7,10 +7,12 @@ import cn.lxw.business.R
 import cn.lxw.business.baselibrary.ext.enable
 import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpActivity
+import cn.lxw.business.provider.router.RouterPath
 import cn.lxw.business.user.data.protocol.UserInfo
 import cn.lxw.business.user.injection.component.DaggerUserComponent
 import cn.lxw.business.user.presenter.LoginPresenter
 import cn.lxw.business.user.presenter.view.LoginView
+import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 
@@ -23,6 +25,7 @@ import org.jetbrains.anko.startActivity
  * 备注：登陆界面
  * 功能描述：
  */
+@Route(path = RouterPath.UserCenter.PATH_LOGIN)
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
 

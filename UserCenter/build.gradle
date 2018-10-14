@@ -6,6 +6,12 @@ if (isUserModel.toBoolean()) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+
+}
 android {
     compileSdkVersion 26
 
@@ -17,6 +23,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+
     }
 
     buildTypes {
@@ -26,17 +33,16 @@ android {
         }
     }
 
-
     //动态配置清单文件
-    sourceSets{
-        main{
-            if(isUserModel.toBoolean()){
+    sourceSets {
+        main {
+            if (isUserModel.toBoolean()) {
                 manifest.srcFile 'src/main/release/AndroidManifest.xml'
                 //release模式下，排除debug目录下的所有java文件
-                java{
+                java {
                     exclude 'debug/**'
                 }
-            }else{
+            } else {
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             }
         }
@@ -71,6 +77,8 @@ dependencies {
     implementation project(':Provider')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
+
+    kapt "com.alibaba:arouter-compiler:${arouter_compiler_version}"
 }
 
 repositories {

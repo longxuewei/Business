@@ -6,6 +6,7 @@ import cn.lxw.business.baselibrary.BuildConfig
 import cn.lxw.business.baselibrary.injection.component.AppComponent
 import cn.lxw.business.baselibrary.injection.component.DaggerAppComponent
 import cn.lxw.business.baselibrary.injection.module.AppModule
+import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -28,7 +29,17 @@ class BaseApplication : Application() {
         context = this
         initAppInjection()
         initLogger()
+        initARouter()
 
+    }
+
+    /**
+     * 初始化ARouter
+     */
+    private fun initARouter() {
+        ARouter.openDebug()
+        ARouter.openLog()
+        ARouter.init(this)
     }
 
 

@@ -129,4 +129,7 @@ dependencies {
 
     //商品标签单选多选View
     api "com.hyman:flowlayout-lib:${flowlayout_version}"
+
+    //ARouter跨模块跳转
+    api "com.alibaba:arouter-api:${arouter_api_version}"
 }
