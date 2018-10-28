@@ -1,6 +1,6 @@
 import cn.lxw.business.baselibrary.common.BaseConstant
 import cn.lxw.business.user.data.protocol.UserInfo
-import com.kotlin.base.utils.AppPrefsUtils
+import cn.lxw.business.baselibrary.utils.AppPrefsUtils
 
 /**
  * *******************************

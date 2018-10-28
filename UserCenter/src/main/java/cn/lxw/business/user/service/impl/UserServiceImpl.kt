@@ -1,6 +1,5 @@
 package cn.lxw.business.user.service.impl
 
-import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.baselibrary.ext.convert
 import cn.lxw.business.baselibrary.ext.convertBoolean
 import cn.lxw.business.user.data.protocol.UserInfo

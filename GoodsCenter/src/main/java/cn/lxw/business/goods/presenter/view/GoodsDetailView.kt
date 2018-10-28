@@ -1,7 +1,7 @@
 package cn.lxw.business.goods.presenter.view
 
 import cn.lxw.business.baselibrary.presenter.view.BaseView
-import com.kotlin.goods.data.protocol.Goods
+import cn.lxw.business.goods.data.protocol.Goods
 
 /**
  * *******************************

@@ -9,7 +9,7 @@ import cn.lxw.business.baselibrary.ui.activity.BaseFragment
 import cn.lxw.business.goods.R
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
-import com.kotlin.goods.event.GoodsDetailImageEvent
+import cn.lxw.business.goods.event.GoodsDetailImageEvent
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_two.*
 
 /**

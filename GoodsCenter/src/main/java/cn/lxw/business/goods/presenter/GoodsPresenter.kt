@@ -3,9 +3,9 @@ package cn.lxw.business.goods.presenter
 import cn.lxw.business.baselibrary.ext.execute
 import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
+import cn.lxw.business.goods.data.protocol.Goods
 import cn.lxw.business.goods.presenter.view.GoodsListView
 import cn.lxw.business.goods.service.GoodsService
-import com.kotlin.goods.data.protocol.Goods
 import com.orhanobut.logger.Logger
 import javax.inject.Inject
 

@@ -10,9 +10,12 @@ import android.view.animation.ScaleAnimation
 import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseActivity
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpFragment
+import cn.lxw.business.baselibrary.utils.YuanFenConverter
 import cn.lxw.business.baselibrary.widget.BannerImageLoader
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
+import cn.lxw.business.goods.data.protocol.Goods
+import cn.lxw.business.goods.event.GoodsDetailImageEvent
 import cn.lxw.business.goods.event.SkuChangedEvent
 import cn.lxw.business.goods.injection.component.DaggerGoodsComponent
 import cn.lxw.business.goods.injection.module.GoodsModule
@@ -22,9 +25,6 @@ import cn.lxw.business.goods.ui.activity.GoodsDetailActivity
 import cn.lxw.business.goods.weight.GoodsSkuPopView
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
-import com.kotlin.base.utils.YuanFenConverter
-import com.kotlin.goods.data.protocol.Goods
-import com.kotlin.goods.event.GoodsDetailImageEvent
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*

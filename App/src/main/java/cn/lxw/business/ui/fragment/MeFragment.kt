@@ -13,7 +13,7 @@ import cn.lxw.business.provider.common.isLogined
 import cn.lxw.business.ui.activity.SettingActivity
 import cn.lxw.business.user.ui.activity.LoginActivity
 import cn.lxw.business.user.ui.activity.UserInfoActivity
-import com.kotlin.base.utils.AppPrefsUtils
+import cn.lxw.business.baselibrary.utils.AppPrefsUtils
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.support.v4.startActivity
 

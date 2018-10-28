@@ -10,10 +10,10 @@ import cn.lxw.business.baselibrary.common.*
 import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseFragment
 import cn.lxw.business.baselibrary.widget.BannerImageLoader
+import cn.lxw.business.common.*
 import cn.lxw.business.goods.ui.activity.SearchGoodsActivity
 import cn.lxw.business.ui.adapter.HomeDiscountAdapter
 import cn.lxw.business.ui.adapter.TopicAdapter
-import com.kotlin.mall.common.*
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*

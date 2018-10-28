@@ -1,6 +1,6 @@
 package cn.lxw.business.goods.service
 
-import com.kotlin.goods.data.protocol.Goods
+import cn.lxw.business.goods.data.protocol.Goods
 import io.reactivex.Observable
 
 /**

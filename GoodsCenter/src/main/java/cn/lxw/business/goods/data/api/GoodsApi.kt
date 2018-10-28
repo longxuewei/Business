@@ -4,7 +4,7 @@ import cn.lxw.business.baselibrary.data.protocol.BaseResponse
 import cn.lxw.business.goods.data.protocol.GetGoodsDetailReq
 import cn.lxw.business.goods.data.protocol.GetGoodsListByKeywordReq
 import cn.lxw.business.goods.data.protocol.GetGoodsListReq
-import com.kotlin.goods.data.protocol.Goods
+import cn.lxw.business.goods.data.protocol.Goods
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST

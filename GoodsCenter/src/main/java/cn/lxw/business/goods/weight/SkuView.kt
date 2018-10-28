@@ -8,9 +8,9 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
+import cn.lxw.business.goods.data.protocol.GoodsSku
 import cn.lxw.business.goods.event.SkuChangedEvent
 import com.eightbitlab.rxbus.Bus
-import com.kotlin.goods.data.protocol.GoodsSku
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
 import kotlinx.android.synthetic.main.layout_sku_view.view.*

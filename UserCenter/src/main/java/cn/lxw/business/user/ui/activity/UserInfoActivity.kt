@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.View
 import cn.lxw.business.R
 import cn.lxw.business.baselibrary.common.BaseConstant
@@ -23,9 +22,9 @@ import com.jph.takephoto.app.TakePhoto
 import com.jph.takephoto.app.TakePhotoImpl
 import com.jph.takephoto.compress.CompressConfig
 import com.jph.takephoto.model.TResult
-import com.kotlin.base.utils.AppPrefsUtils
-import com.kotlin.base.utils.DateUtils
-import com.kotlin.base.utils.GlideUtils
+import cn.lxw.business.baselibrary.utils.AppPrefsUtils
+import cn.lxw.business.baselibrary.utils.DateUtils
+import cn.lxw.business.baselibrary.utils.GlideUtils
 import com.orhanobut.logger.Logger
 import com.qiniu.android.storage.UploadManager
 import kotlinx.android.synthetic.main.activity_user_info.*

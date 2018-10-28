@@ -11,7 +11,7 @@ import cn.lxw.business.baselibrary.rx.BaseFuncBoolean
 import cn.lxw.business.baselibrary.rx.BaseObserver
 import cn.lxw.business.baselibrary.widget.DefaultTextWatcher
 import com.kennyc.view.MultiStateView
-import com.kotlin.base.utils.GlideUtils
+import cn.lxw.business.baselibrary.utils.GlideUtils
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

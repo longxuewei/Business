@@ -1,7 +1,7 @@
 package cn.lxw.business.provider.common
 
 import cn.lxw.business.baselibrary.common.BaseConstant
-import com.kotlin.base.utils.AppPrefsUtils
+import cn.lxw.business.baselibrary.utils.AppPrefsUtils
 
 /**
  * *******************************

@@ -7,10 +7,10 @@ import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ext.setVisibility
 import cn.lxw.business.baselibrary.ui.activity.BaseActivity
 import cn.lxw.business.baselibrary.ui.adapter.BaseRecyclerViewAdapter
+import cn.lxw.business.baselibrary.utils.AppPrefsUtils
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
 import cn.lxw.business.goods.ui.adapter.SearchHistoryAdapter
-import com.kotlin.base.utils.AppPrefsUtils
 import kotlinx.android.synthetic.main.activity_search_goods.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast

@@ -1,9 +1,9 @@
 package cn.lxw.business.goods.service.impl
 
 import cn.lxw.business.baselibrary.ext.convert
+import cn.lxw.business.goods.data.protocol.Goods
 import cn.lxw.business.goods.data.repository.GoodsRepository
 import cn.lxw.business.goods.service.GoodsService
-import com.kotlin.goods.data.protocol.Goods
 import io.reactivex.Observable
 import javax.inject.Inject
 

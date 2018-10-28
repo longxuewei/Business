@@ -30,7 +30,7 @@
 
             <View style="@style/DividerFixedWidth.MarginTopBottom" />
 
-            <com.kotlin.base.widgets.VerifyButton
+            <cn.lxw.business.baselibrary.widget.VerifyButton
                 android:id="@+id/btGetVerifyCode"
                 style="@style/WrapMatch"
                 android:background="@null"

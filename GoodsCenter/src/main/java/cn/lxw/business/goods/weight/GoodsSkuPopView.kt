@@ -10,15 +10,15 @@ import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import cn.lxw.business.baselibrary.ext.loadUrl
 import cn.lxw.business.baselibrary.ext.onClick
+import cn.lxw.business.baselibrary.utils.YuanFenConverter
 import cn.lxw.business.baselibrary.widget.DefaultTextWatcher
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
+import cn.lxw.business.goods.data.protocol.GoodsSku
+import cn.lxw.business.goods.event.AddCartEvent
 import cn.lxw.business.goods.event.SkuChangedEvent
 import cn.lxw.business.goods.ext.getCountEditText
 import com.eightbitlab.rxbus.Bus
-import com.kotlin.base.utils.YuanFenConverter
-import com.kotlin.goods.data.protocol.GoodsSku
-import com.kotlin.goods.event.AddCartEvent
 import kotlinx.android.synthetic.main.layout_sku_pop.view.*
 
 /*

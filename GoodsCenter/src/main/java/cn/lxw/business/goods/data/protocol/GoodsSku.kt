@@ -1,4 +1,4 @@
-package com.kotlin.goods.data.protocol
+package cn.lxw.business.goods.data.protocol
 
 /*
     商品SKU数据类

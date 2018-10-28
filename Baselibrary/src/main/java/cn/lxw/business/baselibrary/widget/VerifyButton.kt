@@ -1,9 +1,8 @@
-package com.kotlin.base.widgets
+package cn.lxw.business.baselibrary.widget
 
 import android.content.Context
 import android.os.Handler
 import android.util.AttributeSet
-import android.widget.Button
 import cn.lxw.business.baselibrary.R
 
 /*

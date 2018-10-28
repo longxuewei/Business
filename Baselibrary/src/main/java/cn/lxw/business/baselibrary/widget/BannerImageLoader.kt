@@ -2,7 +2,7 @@ package cn.lxw.business.baselibrary.widget
 
 import android.content.Context
 import android.widget.ImageView
-import com.kotlin.base.utils.GlideUtils
+import cn.lxw.business.baselibrary.utils.GlideUtils
 import com.youth.banner.loader.ImageLoader
 
 /**

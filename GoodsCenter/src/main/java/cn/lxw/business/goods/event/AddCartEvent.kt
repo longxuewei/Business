@@ -1,4 +1,4 @@
-package com.kotlin.goods.event
+package cn.lxw.business.goods.event
 
 /*
     加入购物车事件

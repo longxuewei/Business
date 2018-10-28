@@ -10,13 +10,13 @@ import cn.lxw.business.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
 import cn.lxw.business.goods.common.GoodsConstant.Companion.KEY_GOODS_CATEGORY_ID
+import cn.lxw.business.goods.data.protocol.Goods
 import cn.lxw.business.goods.injection.component.DaggerGoodsComponent
 import cn.lxw.business.goods.injection.module.GoodsModule
 import cn.lxw.business.goods.presenter.GoodsPresenter
 import cn.lxw.business.goods.presenter.view.GoodsListView
 import cn.lxw.business.goods.ui.adapter.GoodsAdapter
 import com.kennyc.view.MultiStateView
-import com.kotlin.goods.data.protocol.Goods
 import kotlinx.android.synthetic.main.activity_goods.*
 import org.jetbrains.anko.startActivity
 

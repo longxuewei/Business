@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import cn.lxw.business.baselibrary.ext.loadUrl
 import cn.lxw.business.baselibrary.ui.adapter.BaseRecyclerViewAdapter
+import cn.lxw.business.baselibrary.utils.YuanFenConverter
 import cn.lxw.business.goods.R
-import com.kotlin.base.utils.YuanFenConverter
-import com.kotlin.goods.data.protocol.Goods
+import cn.lxw.business.goods.data.protocol.Goods
 import kotlinx.android.synthetic.main.layout_goods_item.view.*
 
 /**
