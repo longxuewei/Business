@@ -12,6 +12,7 @@ import javax.inject.Inject
     购物车 业务层实现类
  */
 class CartServiceImpl @Inject constructor() : CartService {
+
     @Inject
     lateinit var repository: CartRepository
 

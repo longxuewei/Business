@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import android.widget.Toast
 import cn.lxw.business.baselibrary.ext.onClick
 import cn.lxw.business.baselibrary.ui.activity.BaseActivity
 import cn.lxw.business.baselibrary.ui.activity.BaseMvpFragment
@@ -15,6 +16,7 @@ import cn.lxw.business.baselibrary.widget.BannerImageLoader
 import cn.lxw.business.goods.R
 import cn.lxw.business.goods.common.GoodsConstant
 import cn.lxw.business.goods.data.protocol.Goods
+import cn.lxw.business.goods.event.AddCartEvent
 import cn.lxw.business.goods.event.GoodsDetailImageEvent
 import cn.lxw.business.goods.event.SkuChangedEvent
 import cn.lxw.business.goods.injection.component.DaggerGoodsComponent
@@ -41,12 +43,14 @@ import org.jetbrains.anko.contentView
  */
 class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), GoodsDetailView {
 
+
     private lateinit var mAnimationStart: ScaleAnimation
 
     private lateinit var mAnimationEnd: ScaleAnimation
 
-
     private lateinit var mSkuPopView: GoodsSkuPopView
+
+    private var mCurrentGoods: Goods? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -95,6 +99,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     }
 
     override fun onGetGoodsDetailResult(result: Goods) {
+        mCurrentGoods = result
         mGoodsDetailBanner.setImages(result.goodsBanner.split(","))
         mGoodsDetailBanner.start()
 
@@ -122,6 +127,18 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         Bus.observe<SkuChangedEvent>().subscribe {
             mSkuSelectedTv.text = mSkuPopView.getSelectSku() + GoodsConstant.SKU_SEPARATOR + mSkuPopView.getSelectCount() + "件"
         }.registerInBus(this)
+
+
+        Bus.observe<AddCartEvent>().subscribe {
+            mCurrentGoods?.let {
+                presenter.addCart(it.id,
+                        it.goodsDesc,
+                        it.goodsDefaultIcon,
+                        it.goodsDefaultPrice,
+                        mSkuPopView.getSelectCount(),
+                        mSkuPopView.getSelectSku())
+            }
+        }.registerInBus(this)
     }
 
     override fun onDestroy() {
@@ -143,5 +160,10 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
                 0.95f, 1f, 0.95f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         mAnimationEnd.duration = 500
         mAnimationEnd.fillAfter = true
+    }
+
+
+    override fun onAddCartResult(result: Int) {
+        Toast.makeText(activity, "add_cart-$result", Toast.LENGTH_LONG).show()
     }
 }

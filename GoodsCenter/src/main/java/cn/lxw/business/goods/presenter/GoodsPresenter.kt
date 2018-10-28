@@ -5,6 +5,7 @@ import cn.lxw.business.baselibrary.presenter.BasePresenter
 import cn.lxw.business.baselibrary.rx.BaseObserver
 import cn.lxw.business.goods.data.protocol.Goods
 import cn.lxw.business.goods.presenter.view.GoodsListView
+import cn.lxw.business.goods.service.CartService
 import cn.lxw.business.goods.service.GoodsService
 import com.orhanobut.logger.Logger
 import javax.inject.Inject
@@ -22,6 +23,8 @@ class GoodsPresenter @Inject constructor() : BasePresenter<GoodsListView>() {
 
     @Inject
     lateinit var goodsService: GoodsService
+
+
 
 
     fun getGoodsList(categoryId: Int, pageNo: Int) {
@@ -62,4 +65,6 @@ class GoodsPresenter @Inject constructor() : BasePresenter<GoodsListView>() {
         }, lifecycleProvider)
 
     }
+
+
 }
